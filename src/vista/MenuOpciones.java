@@ -26,8 +26,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         btnRegistrarCliente = new javax.swing.JButton();
         btnRegistrarCurso = new javax.swing.JButton();
         btnCambiarPIN = new javax.swing.JButton();
-        btnAsignarCursoRequisito = new javax.swing.JButton();
-        btnModificacionInformacion = new javax.swing.JButton();
+        btnOperaciones = new javax.swing.JButton();
         btnConsultasAdicionales = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
@@ -63,19 +62,11 @@ public class MenuOpciones extends javax.swing.JFrame {
             }
         });
 
-        btnAsignarCursoRequisito.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        btnAsignarCursoRequisito.setText("Asignar Requisitos y Correquisitos a un Curso");
-        btnAsignarCursoRequisito.addActionListener(new java.awt.event.ActionListener() {
+        btnOperaciones.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnOperaciones.setText("Realizar Operaciones");
+        btnOperaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAsignarCursoRequisitoActionPerformed(evt);
-            }
-        });
-
-        btnModificacionInformacion.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        btnModificacionInformacion.setText("Modificaciones a la Información");
-        btnModificacionInformacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificacionInformacionActionPerformed(evt);
+                btnOperacionesActionPerformed(evt);
             }
         });
 
@@ -103,23 +94,27 @@ public class MenuOpciones extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnModificacionInformacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegistrarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCambiarPIN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 95, Short.MAX_VALUE)
+                        .addGap(52, 52, 52)
+                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCambiarPIN)
+                            .addComponent(btnRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAsignarCursoRequisito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRegistrarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnConsultasAdicionales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnOperaciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
                         .addGap(48, 48, 48))
                     .addGroup(panelMenuLayout.createSequentialGroup()
                         .addComponent(btnSalir)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(panelMenuLayout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(lblTitulo)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addComponent(lblTitulo))
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addComponent(btnConsultasAdicionales, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 181, Short.MAX_VALUE))
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,12 +130,10 @@ public class MenuOpciones extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCambiarPIN, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAsignarCursoRequisito, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificacionInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnConsultasAdicionales, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
+                    .addComponent(btnOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(btnConsultasAdicionales, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,13 +162,9 @@ public class MenuOpciones extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCambiarPINActionPerformed
 
-    private void btnAsignarCursoRequisitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarCursoRequisitoActionPerformed
+    private void btnOperacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOperacionesActionPerformed
 
-    }//GEN-LAST:event_btnAsignarCursoRequisitoActionPerformed
-
-    private void btnModificacionInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificacionInformacionActionPerformed
-
-    }//GEN-LAST:event_btnModificacionInformacionActionPerformed
+    }//GEN-LAST:event_btnOperacionesActionPerformed
 
     private void btnConsultasAdicionalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasAdicionalesActionPerformed
 
@@ -222,10 +211,9 @@ public class MenuOpciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnAsignarCursoRequisito;
     public javax.swing.JButton btnCambiarPIN;
     public javax.swing.JButton btnConsultasAdicionales;
-    public javax.swing.JButton btnModificacionInformacion;
+    public javax.swing.JButton btnOperaciones;
     public javax.swing.JButton btnRegistrarCliente;
     public javax.swing.JButton btnRegistrarCurso;
     public javax.swing.JButton btnSalir;

@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
 import logicadenegocios.Cliente;
 import validaciones.Validaciones;
 import vista.ConsultarClientesOrdenados;
-import vista.ConsultarCuentasOrdenadas;
 import vista.ConsultarInformacionClienteCuentas;
 import vista.RegistrarCliente;
 

@@ -82,36 +82,47 @@ public class Validaciones {
   }
   
   public static boolean validarPIN(String pPIN){
-      // ReGex to check if a string
-      // contains uppercase, lowercase
-      // special character & numeric value
- 
-      
-     String regex = "^(?=.*[0-9])"
-              + "(?=.*[a-z])(?=.*[A-Z])"
-              + "(?=.*[@#$%^&+=])"
-              + "(?=\\S+$).{6,6}$"; 
+    // ReGex to check if a string
+    // contains uppercase, lowercase
+    // special character & numeric value      
+    String regex = "^(?=.*[0-9])"
+        + "(?=.*[a-z])(?=.*[A-Z])"
+        + "(?=.*[@#$%^&+=])"
+        + "(?=\\S+$).{6,6}$"; 
 
-      // Compile the ReGex
-      Pattern p = Pattern.compile(regex);
+    // Compile the ReGex
+    Pattern p = Pattern.compile(regex);
 
-      // If the string is empty
-      // then print No
-      if (pPIN == null) {
-          System.out.println("No");
-          return false;
+    // If the string is empty
+    // then print No
+    if (pPIN == null) {
+      System.out.println("No");
+      return false;
+    }
+
+    // Find match between given string
+    // & regular expression
+    Matcher m = p.matcher(pPIN);
+
+    // Print Yes if string
+    // matches ReGex
+    if (m.matches())
+      return true;
+    else
+      return false;
+  } 
+  
+   public static boolean validarMontoSinDecimal(String pMonto) {
+	// Patron para validar el monto sin decimales
+      Pattern pattern = Pattern.compile("^\\d+$");
+
+      // El monto a validar
+      Matcher mather = pattern.matcher(pMonto);
+
+      if (mather.find() == true) {
+        return true;
+      } else {
+        return false;
       }
-
-      // Find match between given string
-      // & regular expression
-      Matcher m = p.matcher(pPIN);
-
-      // Print Yes if string
-      // matches ReGex
-      if (m.matches())
-          return true;
-      else
-          return false;
-  }      
-    
+  } 
 }

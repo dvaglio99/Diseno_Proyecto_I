@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import logicadenegocios.Cliente;
 import vista.CambiarPIN;
 import vista.MenuConsultasAdicionales;
+import vista.MenuModificaciones;
 import vista.MenuOpciones;
 import vista.RegistrarCliente;
 
@@ -19,6 +20,7 @@ public class ControladorMenuOpciones implements ActionListener{
     this.vista.btnRegistrarCliente.addActionListener(this);
     this.vista.btnConsultasAdicionales.addActionListener(this);
     this.vista.btnCambiarPIN.addActionListener(this);
+    this.vista.btnOperaciones.addActionListener(this);
     this.vista.btnSalir.addActionListener(this);
   }
 
@@ -32,6 +34,9 @@ public class ControladorMenuOpciones implements ActionListener{
     }
     if (e.getSource() == vista.btnCambiarPIN) {
       cambiarPIN();
+    }
+    if (e.getSource() == vista.btnOperaciones) {
+       mostrarMenuOperaciones();
     }
     if (e.getSource() == vista.btnSalir) {
       System.exit(0);
@@ -58,5 +63,12 @@ public class ControladorMenuOpciones implements ActionListener{
     CuentaDAO cuentaDao = new CuentaDAO();
     ControladorCuenta controlador = new ControladorCuenta(cambio, cuentaDao);
     controlador.vistaCambiarPIN.setVisible(true);
+  }
+  
+  public void mostrarMenuOperaciones() {
+    MenuModificaciones menu = new MenuModificaciones();
+   
+    ControladorMenuModificaciones controlador = new ControladorMenuModificaciones(menu);
+    controlador.vista.setVisible(true);
   }
 }
