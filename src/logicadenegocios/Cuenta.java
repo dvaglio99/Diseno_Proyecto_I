@@ -32,6 +32,9 @@ public class Cuenta {
     setCliente(pDuenio);
     operaciones = new ArrayList<Operacion>();
   }
+
+    public Cuenta() {
+    }
   
   public String calcularTotalComisionDepositoRetiro() {
 	return "";

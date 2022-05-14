@@ -5,11 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import logicadenegocios.Cliente;
+import logicadenegocios.Cuenta;
 import vista.CambiarPIN;
 import vista.MenuConsultasAdicionales;
 import vista.MenuModificaciones;
 import vista.MenuOpciones;
 import vista.RegistrarCliente;
+import vista.RegistrarCuenta;
 
 public class ControladorMenuOpciones implements ActionListener{
   public MenuOpciones vista;
@@ -18,6 +20,7 @@ public class ControladorMenuOpciones implements ActionListener{
     vista = pVista;
     
     this.vista.btnRegistrarCliente.addActionListener(this);
+    this.vista.btnRegistrarCuenta.addActionListener(this);
     this.vista.btnConsultasAdicionales.addActionListener(this);
     this.vista.btnCambiarPIN.addActionListener(this);
     this.vista.btnOperaciones.addActionListener(this);
@@ -28,6 +31,10 @@ public class ControladorMenuOpciones implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == vista.btnRegistrarCliente) {
       registrarCliente();
+    }
+    if (e.getSource() == vista.btnRegistrarCuenta) {
+        registrarCuenta();
+
     }
     if (e.getSource() == vista.btnConsultasAdicionales) {
       mostrarConsultasAdicionales();
@@ -50,6 +57,15 @@ public class ControladorMenuOpciones implements ActionListener{
     ControladorCliente controlador = new ControladorCliente(registro, cliente);
     controlador.vistaRegistrarCliente.setVisible(true);
     
+  }
+  
+  public void registrarCuenta() {
+
+      RegistrarCuenta nuevaCuenta = new RegistrarCuenta();
+      Cuenta cuenta = new Cuenta();
+      ControladorCuenta controlador = new ControladorCuenta(nuevaCuenta, cuenta);
+      controlador.vistaRegistrarCuenta.setVisible(true);
+
   }
   
   public void mostrarConsultasAdicionales() {
