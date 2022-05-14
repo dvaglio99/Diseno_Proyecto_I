@@ -24,7 +24,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         panelMenu = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         btnRegistrarCliente = new javax.swing.JButton();
-        btnRegistrarCurso = new javax.swing.JButton();
+        btnRegistrarCuenta = new javax.swing.JButton();
         btnCambiarPIN = new javax.swing.JButton();
         btnOperaciones = new javax.swing.JButton();
         btnConsultasAdicionales = new javax.swing.JButton();
@@ -46,11 +46,11 @@ public class MenuOpciones extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrarCurso.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        btnRegistrarCurso.setText("Registrar una cuenta");
-        btnRegistrarCurso.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarCuenta.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnRegistrarCuenta.setText("Registrar una cuenta");
+        btnRegistrarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarCursoActionPerformed(evt);
+                btnRegistrarCuentaActionPerformed(evt);
             }
         });
 
@@ -100,7 +100,7 @@ public class MenuOpciones extends javax.swing.JFrame {
                             .addComponent(btnRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnRegistrarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegistrarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnOperaciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
                         .addGap(48, 48, 48))
                     .addGroup(panelMenuLayout.createSequentialGroup()
@@ -125,7 +125,7 @@ public class MenuOpciones extends javax.swing.JFrame {
                 .addComponent(lblTitulo)
                 .addGap(18, 18, 18)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistrarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -154,9 +154,9 @@ public class MenuOpciones extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnRegistrarClienteActionPerformed
 
-    private void btnRegistrarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCursoActionPerformed
+    private void btnRegistrarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCuentaActionPerformed
  
-    }//GEN-LAST:event_btnRegistrarCursoActionPerformed
+    }//GEN-LAST:event_btnRegistrarCuentaActionPerformed
 
     private void btnCambiarPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPINActionPerformed
 
@@ -215,7 +215,7 @@ public class MenuOpciones extends javax.swing.JFrame {
     public javax.swing.JButton btnConsultasAdicionales;
     public javax.swing.JButton btnOperaciones;
     public javax.swing.JButton btnRegistrarCliente;
-    public javax.swing.JButton btnRegistrarCurso;
+    public javax.swing.JButton btnRegistrarCuenta;
     public javax.swing.JButton btnSalir;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelMenu;
