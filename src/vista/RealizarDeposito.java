@@ -12,8 +12,6 @@ public class RealizarDeposito extends javax.swing.JFrame {
   public RealizarDeposito() {
     initComponents();
     llenarCbxCuentas();
-    cbxCargoOperacion.addItem("False");
-    cbxCargoOperacion.addItem("True");
   }
 
   /**
@@ -38,8 +36,9 @@ public class RealizarDeposito extends javax.swing.JFrame {
         btnBuscarCliente = new javax.swing.JButton();
         txtPropietarioCuenta = new javax.swing.JTextField();
         txtMonto = new javax.swing.JTextField();
-        lblNombreEscuela3 = new javax.swing.JLabel();
-        cbxCargoOperacion = new javax.swing.JComboBox<>();
+        txtCantidadOperaciones = new javax.swing.JTextField();
+        lblNombreEscuela5 = new javax.swing.JLabel();
+        lblNumOp = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,16 +91,11 @@ public class RealizarDeposito extends javax.swing.JFrame {
             }
         });
 
-        lblNombreEscuela3.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        lblNombreEscuela3.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreEscuela3.setText("Seleccione el cargo de operacion para ver si aplica: ");
+        lblNombreEscuela5.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        lblNombreEscuela5.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombreEscuela5.setText("Cantidad de operaciones efectuadas por el cliente:");
 
-        cbxCargoOperacion.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        cbxCargoOperacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxCargoOperacionActionPerformed(evt);
-            }
-        });
+        lblNumOp.setText("OP: ");
 
         javax.swing.GroupLayout panelConsultaLayout = new javax.swing.GroupLayout(panelConsulta);
         panelConsulta.setLayout(panelConsultaLayout);
@@ -123,17 +117,22 @@ public class RealizarDeposito extends javax.swing.JFrame {
                                     .addComponent(lblNombreEscuela)
                                     .addComponent(lblNombreEscuela2)
                                     .addComponent(lblNombreEscuela4)
-                                    .addComponent(lblNombreEscuela3))
-                                .addGap(18, 18, 18)
+                                    .addComponent(lblNombreEscuela5))
+                                .addGap(31, 31, 31)
                                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbxCuentas, 0, 312, Short.MAX_VALUE)
                                     .addComponent(txtPropietarioCuenta)
                                     .addComponent(txtMonto)
-                                    .addComponent(cbxCargoOperacion, 0, 312, Short.MAX_VALUE))))))
+                                    .addComponent(txtCantidadOperaciones))))))
                 .addGap(168, 168, 168))
             .addGroup(panelConsultaLayout.createSequentialGroup()
-                .addGap(327, 327, 327)
-                .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelConsultaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblNumOp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelConsultaLayout.createSequentialGroup()
+                        .addGap(342, 342, 342)
+                        .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelConsultaLayout.setVerticalGroup(
@@ -153,17 +152,18 @@ public class RealizarDeposito extends javax.swing.JFrame {
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEscuela4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPropietarioCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                .addGap(14, 14, 14)
+                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCantidadOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombreEscuela5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNombreEscuela2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
-                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombreEscuela3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxCargoOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(74, 74, 74)
+                .addGap(57, 57, 57)
                 .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addComponent(lblNumOp, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,10 +195,6 @@ public class RealizarDeposito extends javax.swing.JFrame {
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
-
-    private void cbxCargoOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCargoOperacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCargoOperacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,14 +250,15 @@ public class RealizarDeposito extends javax.swing.JFrame {
     public javax.swing.JButton btnBuscarCliente;
     public javax.swing.JButton btnDepositar;
     public javax.swing.JButton btnVolver;
-    public javax.swing.JComboBox<String> cbxCargoOperacion;
     public javax.swing.JComboBox<String> cbxCuentas;
     private javax.swing.JLabel lblNombreEscuela;
     private javax.swing.JLabel lblNombreEscuela2;
-    private javax.swing.JLabel lblNombreEscuela3;
     private javax.swing.JLabel lblNombreEscuela4;
+    private javax.swing.JLabel lblNombreEscuela5;
+    public javax.swing.JLabel lblNumOp;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelConsulta;
+    public javax.swing.JTextField txtCantidadOperaciones;
     public javax.swing.JTextField txtMonto;
     public javax.swing.JTextField txtPropietarioCuenta;
     // End of variables declaration//GEN-END:variables

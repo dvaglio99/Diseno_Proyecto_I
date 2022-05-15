@@ -7,6 +7,7 @@ import vista.MenuModificaciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import vista.RealizarDeposito;
+import vista.RealizarRetiro;
 
 /**
  * Abstraccion de la clase ControladorMenuModificaciones
@@ -24,8 +25,10 @@ public class ControladorMenuModificaciones implements ActionListener {
     vista = pVista;
     
     this.vista.btnRealizarDepositoColones.addActionListener(this);
-    this.vista.btnEliminarCursoDePlan.addActionListener(this);
-    this.vista.btnEliminarCurso.addActionListener(this);
+    this.vista.btnRealizarDepositoCambioMoneda.addActionListener(this);
+    this.vista.btnRealizarRetiroColones.addActionListener(this);
+    this.vista.btnRealizarRetiroCompraMoneda.addActionListener(this);
+
     this.vista.btnVolver.addActionListener(this);
   }
 
@@ -38,11 +41,11 @@ public class ControladorMenuModificaciones implements ActionListener {
     if (e.getSource() == vista.btnRealizarDepositoColones) {
       realizarDepositoColones();
     }
-    if (e.getSource() == vista.btnEliminarCursoDePlan) {
+    if (e.getSource() == vista.btnRealizarDepositoCambioMoneda) {
       eliminarCursoDePlan();
     }
-    if (e.getSource() == vista.btnEliminarCurso) {
-      eliminarCurso();
+    if (e.getSource() == vista.btnRealizarRetiroColones) {
+      realizarRetiroColones();
     }
     if (e.getSource() == vista.btnVolver) {
       this.vista.setVisible(false);
@@ -74,8 +77,13 @@ public class ControladorMenuModificaciones implements ActionListener {
   /**
    * Metodo que abre la ventana que para eliminar un curso
    */
-  public void eliminarCurso() { /*
-    EliminarCurso eliminar = new EliminarCurso();
+  public void realizarRetiroColones() { 
+    RealizarRetiro retirar = new RealizarRetiro();
+    CuentaDAO cuentaDao = new CuentaDAO();
+    OperacionesDAO operacionDao = new OperacionesDAO();
+    ControladorOperaciones controlador = new ControladorOperaciones(retirar, cuentaDao, operacionDao);
+    controlador.vistaRealizarRetiro.setVisible(true);
+   /* EliminarCurso eliminar = new EliminarCurso();
     CursoDAO dao = new CursoDAO();
     ControladorCurso controlador = new ControladorCurso(eliminar, dao);
     controlador.vistaEliminarCurso.setVisible(true); */

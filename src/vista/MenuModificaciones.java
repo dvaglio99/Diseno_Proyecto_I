@@ -23,9 +23,11 @@ public class MenuModificaciones extends javax.swing.JFrame {
         panelMenu = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         btnRealizarDepositoColones = new javax.swing.JButton();
-        btnEliminarCursoDePlan = new javax.swing.JButton();
-        btnEliminarCurso = new javax.swing.JButton();
+        btnRealizarDepositoCambioMoneda = new javax.swing.JButton();
+        btnRealizarRetiroColones = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
+        btnRealizarRetiroCompraMoneda = new javax.swing.JButton();
+        btnRealizarTransferencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -33,7 +35,7 @@ public class MenuModificaciones extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 36)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("Modificaciones a la Información");
+        lblTitulo.setText("Menu de Operaciones");
 
         btnRealizarDepositoColones.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         btnRealizarDepositoColones.setText("Realizar un Deposito en colones");
@@ -43,19 +45,19 @@ public class MenuModificaciones extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarCursoDePlan.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        btnEliminarCursoDePlan.setText("Eliminar curso de un plan de estudios");
-        btnEliminarCursoDePlan.addActionListener(new java.awt.event.ActionListener() {
+        btnRealizarDepositoCambioMoneda.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnRealizarDepositoCambioMoneda.setText("Realizar un Deposito con Cambio de Moneda ");
+        btnRealizarDepositoCambioMoneda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCursoDePlanActionPerformed(evt);
+                btnRealizarDepositoCambioMonedaActionPerformed(evt);
             }
         });
 
-        btnEliminarCurso.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        btnEliminarCurso.setText("Eliminar un curso");
-        btnEliminarCurso.addActionListener(new java.awt.event.ActionListener() {
+        btnRealizarRetiroColones.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnRealizarRetiroColones.setText("Realizar un Retiro en colones");
+        btnRealizarRetiroColones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCursoActionPerformed(evt);
+                btnRealizarRetiroColonesActionPerformed(evt);
             }
         });
 
@@ -67,28 +69,52 @@ public class MenuModificaciones extends javax.swing.JFrame {
             }
         });
 
+        btnRealizarRetiroCompraMoneda.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnRealizarRetiroCompraMoneda.setText("Realizar un Retiro con Compra de Moneda");
+        btnRealizarRetiroCompraMoneda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarRetiroCompraMonedaActionPerformed(evt);
+            }
+        });
+
+        btnRealizarTransferencia.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnRealizarTransferencia.setText("Realizar Transferencia");
+        btnRealizarTransferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarTransferenciaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMenuLayout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
-                .addComponent(lblTitulo)
-                .addGap(67, 67, 67))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(btnRealizarDepositoColones)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEliminarCursoDePlan)
-                .addGap(28, 28, 28))
-            .addGroup(panelMenuLayout.createSequentialGroup()
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addGap(266, 266, 266)
-                        .addComponent(btnEliminarCurso))
+                        .addGap(49, 49, 49)
+                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRealizarRetiroColones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRealizarDepositoColones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRealizarRetiroCompraMoneda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
+                                .addGap(0, 7, Short.MAX_VALUE)
+                                .addComponent(btnRealizarDepositoCambioMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnVolver)))
+                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelMenuLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnVolver))
+                            .addGroup(panelMenuLayout.createSequentialGroup()
+                                .addGap(163, 163, 163)
+                                .addComponent(lblTitulo)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(panelMenuLayout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(btnRealizarTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMenuLayout.setVerticalGroup(
@@ -96,15 +122,19 @@ public class MenuModificaciones extends javax.swing.JFrame {
             .addGroup(panelMenuLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
                 .addComponent(lblTitulo)
-                .addGap(46, 46, 46)
+                .addGap(59, 59, 59)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRealizarDepositoColones, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarCursoDePlan, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(btnEliminarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                    .addComponent(btnRealizarDepositoCambioMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRealizarRetiroColones, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRealizarRetiroCompraMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(btnRealizarTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,7 +145,9 @@ public class MenuModificaciones extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,17 +157,25 @@ public class MenuModificaciones extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRealizarDepositoColonesActionPerformed
 
-    private void btnEliminarCursoDePlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCursoDePlanActionPerformed
+    private void btnRealizarDepositoCambioMonedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarDepositoCambioMonedaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarCursoDePlanActionPerformed
+    }//GEN-LAST:event_btnRealizarDepositoCambioMonedaActionPerformed
 
-    private void btnEliminarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCursoActionPerformed
+    private void btnRealizarRetiroColonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarRetiroColonesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarCursoActionPerformed
+    }//GEN-LAST:event_btnRealizarRetiroColonesActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
 
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnRealizarRetiroCompraMonedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarRetiroCompraMonedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRealizarRetiroCompraMonedaActionPerformed
+
+    private void btnRealizarTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarTransferenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRealizarTransferenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,9 +214,11 @@ public class MenuModificaciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnEliminarCurso;
-    public javax.swing.JButton btnEliminarCursoDePlan;
+    public javax.swing.JButton btnRealizarDepositoCambioMoneda;
     public javax.swing.JButton btnRealizarDepositoColones;
+    public javax.swing.JButton btnRealizarRetiroColones;
+    public javax.swing.JButton btnRealizarRetiroCompraMoneda;
+    public javax.swing.JButton btnRealizarTransferencia;
     public javax.swing.JButton btnVolver;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelMenu;
