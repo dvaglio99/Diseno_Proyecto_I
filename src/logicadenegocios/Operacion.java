@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logicadenegocios;
 
 import java.util.Date;
 
 /**
- *
- * @author chava
+ * Abstraccion de la clase Operacion
+ * Estructura de las operaciones.
+ * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
+ * @version Proyecto Programado I
  */
 public class Operacion {
     
@@ -18,12 +15,18 @@ public class Operacion {
   private boolean cargoOperacion;
   private double monto;
   
-  
+  /**
+   * Metodo constructor
+   * @param pFecha
+   * @param pTipoOperacion
+   * @param pCargoOperacion
+   * @param pMonto 
+   */
   public Operacion(Date pFecha, String pTipoOperacion, boolean pCargoOperacion, double pMonto) {
-	setFecha(pFecha);
-	setTipoOperacion(pTipoOperacion);
-	setCargoOperacion(pCargoOperacion);
-	setMonto(pMonto);
+    setFecha(pFecha);
+    setTipoOperacion(pTipoOperacion);
+    setCargoOperacion(pCargoOperacion);
+    setMonto(pMonto);
   }
 
   public Date getFecha() {

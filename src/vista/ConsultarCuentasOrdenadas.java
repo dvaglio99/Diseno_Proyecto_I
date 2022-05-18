@@ -2,7 +2,7 @@ package vista;
 
 
 /**
- * Vista para consultar el listado de cursos
+ * Vista para consultar el listado de cuentas ordenadas
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
  * @version Proyecto Programado I
  */

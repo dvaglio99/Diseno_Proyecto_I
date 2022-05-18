@@ -4,7 +4,7 @@ import dao.CuentaDAO;
 
 
 /**
- * Vista para consultar el plan de estudio de un curso en particular
+ * Vista para Cambiar el PIN
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
  * @version Proyecto Programado I
  */
@@ -15,7 +15,7 @@ public class CambiarPIN extends javax.swing.JFrame {
   }
 
   /**
-   * Metodo para llenar el ComboBox de escuelas
+   * Metodo para llenar el ComboBox de cuentas
    */
   public void llenarCbxCuentas() {
     CuentaDAO cuentaDao = new CuentaDAO();

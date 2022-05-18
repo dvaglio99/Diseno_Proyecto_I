@@ -4,22 +4,23 @@ import dao.CuentaDAO;
 
 
 /**
- * Vista para realizar un retiro
+ * Vista para realizar una transferencia
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
  * @version Proyecto Programado I
  */
-public class RealizarRetiro extends javax.swing.JFrame {
-  public RealizarRetiro() {
+public class RealizarTransferencia extends javax.swing.JFrame {
+  public RealizarTransferencia() {
     initComponents();
     llenarCbxCuentas();
   }
 
   /**
-   * Metodo para llenar el ComboBox de cuentas
+   * Metodo para llenar el ComboBox de cuentas origen y destino
    */
   public void llenarCbxCuentas() {
     CuentaDAO cuentaDao = new CuentaDAO();
     cbxCuentas.setModel(cuentaDao.llenarComboBox());
+    cbxCuentasDestino.setModel(cuentaDao.llenarComboBox());
   }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -29,7 +30,7 @@ public class RealizarRetiro extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         lblNombreEscuela = new javax.swing.JLabel();
         cbxCuentas = new javax.swing.JComboBox<>();
-        btnRetirar = new javax.swing.JButton();
+        btnTransferir = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         lblNombreEscuela2 = new javax.swing.JLabel();
         lblNombreEscuela4 = new javax.swing.JLabel();
@@ -53,6 +54,11 @@ public class RealizarRetiro extends javax.swing.JFrame {
         btnVerificarPalabraClave = new javax.swing.JButton();
         lblNombreEscuela11 = new javax.swing.JLabel();
         txtSaldoNoModificable = new javax.swing.JPasswordField();
+        lblNombreEscuela3 = new javax.swing.JLabel();
+        cbxCuentasDestino = new javax.swing.JComboBox<>();
+        btnBuscarClienteDestino = new javax.swing.JButton();
+        lblNombreEscuela12 = new javax.swing.JLabel();
+        txtPropietarioCuentaDestino = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,11 +66,11 @@ public class RealizarRetiro extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 28)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("Realizar Retiro en Colones");
+        lblTitulo.setText("Realizar Transferencia en Colones");
 
         lblNombreEscuela.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         lblNombreEscuela.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreEscuela.setText("Seleccione un numero de cuenta existente : ");
+        lblNombreEscuela.setText("Seleccione el numero de cuenta origen : ");
 
         cbxCuentas.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         cbxCuentas.addActionListener(new java.awt.event.ActionListener() {
@@ -73,11 +79,11 @@ public class RealizarRetiro extends javax.swing.JFrame {
             }
         });
 
-        btnRetirar.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        btnRetirar.setText("Retirar");
-        btnRetirar.addActionListener(new java.awt.event.ActionListener() {
+        btnTransferir.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnTransferir.setText("Transferir");
+        btnTransferir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRetirarActionPerformed(evt);
+                btnTransferirActionPerformed(evt);
             }
         });
 
@@ -91,11 +97,11 @@ public class RealizarRetiro extends javax.swing.JFrame {
 
         lblNombreEscuela2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         lblNombreEscuela2.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreEscuela2.setText("Ingrese el monto a retirar de la cuenta:");
+        lblNombreEscuela2.setText("Ingrese el monto a Transferir de la cuenta:");
 
         lblNombreEscuela4.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         lblNombreEscuela4.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreEscuela4.setText("Propietario de la cuenta:");
+        lblNombreEscuela4.setText("Propietario de la cuenta origen:");
 
         btnBuscarCliente.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         btnBuscarCliente.setText("Buscar Cliente");
@@ -151,14 +157,37 @@ public class RealizarRetiro extends javax.swing.JFrame {
         lblNombreEscuela11.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreEscuela11.setText("Saldo de la cuenta:");
 
+        lblNombreEscuela3.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        lblNombreEscuela3.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombreEscuela3.setText("Propietario de la cuenta destino:");
+
+        cbxCuentasDestino.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        cbxCuentasDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCuentasDestinoActionPerformed(evt);
+            }
+        });
+
+        btnBuscarClienteDestino.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnBuscarClienteDestino.setText("Buscar Cliente");
+        btnBuscarClienteDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteDestinoActionPerformed(evt);
+            }
+        });
+
+        lblNombreEscuela12.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        lblNombreEscuela12.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombreEscuela12.setText("Seleccione el numero de cuenta destino :");
+
         javax.swing.GroupLayout panelConsultaLayout = new javax.swing.GroupLayout(panelConsulta);
         panelConsulta.setLayout(panelConsultaLayout);
         panelConsultaLayout.setHorizontalGroup(
             panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConsultaLayout.createSequentialGroup()
-                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelConsultaLayout.createSequentialGroup()
-                        .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultaLayout.createSequentialGroup()
+                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConsultaLayout.createSequentialGroup()
+                        .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelConsultaLayout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,43 +199,43 @@ public class RealizarRetiro extends javax.swing.JFrame {
                                     .addComponent(lblNombreEscuela7)
                                     .addComponent(lblNombreEscuela8)
                                     .addComponent(lblNombreEscuela9)
-                                    .addComponent(lblNombreEscuela11)))
-                            .addGroup(panelConsultaLayout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(lblNombreEscuela10)))
-                        .addGap(31, 31, 31)
+                                    .addComponent(lblNombreEscuela11)
+                                    .addComponent(lblNombreEscuela10)
+                                    .addComponent(lblNombreEscuela3)
+                                    .addComponent(lblNombreEscuela12))
+                                .addGap(31, 31, 31)
+                                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtPalabraClave, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPalabraClaveNoModificable, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPIN, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPINNoModificable, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSaldoNoModificable, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNumeroTelefonicoCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPropietarioCuenta, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxCuentas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtCantidadOperaciones, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMonto)
+                                    .addComponent(cbxCuentasDestino, 0, 283, Short.MAX_VALUE)
+                                    .addComponent(txtPropietarioCuentaDestino)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelConsultaLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnVolver)
+                                .addGap(181, 181, 181)
+                                .addComponent(lblTitulo)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxCuentas, 0, 308, Short.MAX_VALUE)
-                            .addComponent(txtPropietarioCuenta)
-                            .addComponent(txtMonto)
-                            .addComponent(txtCantidadOperaciones)
-                            .addComponent(txtPIN)
-                            .addComponent(txtPINNoModificable)
-                            .addComponent(txtNumeroTelefonicoCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPalabraClave)
-                            .addComponent(txtPalabraClaveNoModificable)
-                            .addComponent(txtSaldoNoModificable, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelConsultaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnVolver)
-                        .addGap(181, 181, 181)
-                        .addComponent(lblTitulo)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelConsultaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnBuscarCliente)
+                            .addComponent(btnVerificarPIN)
                             .addComponent(btnVerificarPalabraClave)
-                            .addComponent(btnVerificarPIN))))
-                .addGap(152, 152, 152))
-            .addGroup(panelConsultaLayout.createSequentialGroup()
-                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscarClienteDestino)))
                     .addGroup(panelConsultaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblNumOp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelConsultaLayout.createSequentialGroup()
-                        .addGap(344, 344, 344)
-                        .addComponent(btnRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblNumOp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(panelConsultaLayout.createSequentialGroup()
+                .addGap(391, 391, 391)
+                .addComponent(btnTransferir, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelConsultaLayout.setVerticalGroup(
@@ -219,14 +248,17 @@ public class RealizarRetiro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEscuela, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscarCliente)
-                .addGap(8, 8, 8)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEscuela4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPropietarioCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
+                .addGap(3, 3, 3)
+                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCantidadOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombreEscuela5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEscuela8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumeroTelefonicoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -241,31 +273,34 @@ public class RealizarRetiro extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombreEscuela7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnVerificarPIN)
+                    .addComponent(lblNombreEscuela7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerificarPIN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEscuela9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPalabraClaveNoModificable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPalabraClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombreEscuela10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addComponent(btnVerificarPalabraClave)
-                .addGap(18, 18, 18)
-                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCantidadOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombreEscuela5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblNombreEscuela10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerificarPalabraClave))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNombreEscuela2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRetirar)
-                .addGap(124, 124, 124)
-                .addComponent(lblNumOp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxCuentasDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarClienteDestino)
+                    .addComponent(lblNombreEscuela12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombreEscuela3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPropietarioCuentaDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(btnTransferir)
+                .addGap(65, 65, 65)
+                .addComponent(lblNumOp, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -279,8 +314,8 @@ public class RealizarRetiro extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panelConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -291,9 +326,9 @@ public class RealizarRetiro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCuentasActionPerformed
 
-    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
+    private void btnTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRetirarActionPerformed
+    }//GEN-LAST:event_btnTransferirActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
 
@@ -310,6 +345,14 @@ public class RealizarRetiro extends javax.swing.JFrame {
     private void btnVerificarPalabraClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarPalabraClaveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerificarPalabraClaveActionPerformed
+
+    private void cbxCuentasDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCuentasDestinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCuentasDestinoActionPerformed
+
+    private void btnBuscarClienteDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteDestinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarClienteDestinoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,14 +371,46 @@ public class RealizarRetiro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RealizarRetiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealizarTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RealizarRetiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealizarTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RealizarRetiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealizarTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RealizarRetiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealizarTransferencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -372,22 +447,26 @@ public class RealizarRetiro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RealizarRetiro().setVisible(true);
+                new RealizarTransferencia().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuscarCliente;
-    public javax.swing.JButton btnRetirar;
+    public javax.swing.JButton btnBuscarClienteDestino;
+    public javax.swing.JButton btnTransferir;
     public javax.swing.JButton btnVerificarPIN;
     public javax.swing.JButton btnVerificarPalabraClave;
     public javax.swing.JButton btnVolver;
     public javax.swing.JComboBox<String> cbxCuentas;
+    public javax.swing.JComboBox<String> cbxCuentasDestino;
     private javax.swing.JLabel lblNombreEscuela;
     private javax.swing.JLabel lblNombreEscuela10;
     private javax.swing.JLabel lblNombreEscuela11;
+    private javax.swing.JLabel lblNombreEscuela12;
     private javax.swing.JLabel lblNombreEscuela2;
+    private javax.swing.JLabel lblNombreEscuela3;
     private javax.swing.JLabel lblNombreEscuela4;
     private javax.swing.JLabel lblNombreEscuela5;
     private javax.swing.JLabel lblNombreEscuela6;
@@ -405,6 +484,7 @@ public class RealizarRetiro extends javax.swing.JFrame {
     public javax.swing.JTextField txtPalabraClave;
     public javax.swing.JPasswordField txtPalabraClaveNoModificable;
     public javax.swing.JTextField txtPropietarioCuenta;
+    public javax.swing.JTextField txtPropietarioCuentaDestino;
     public javax.swing.JPasswordField txtSaldoNoModificable;
     // End of variables declaration//GEN-END:variables
 }

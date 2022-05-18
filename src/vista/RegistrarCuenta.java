@@ -6,7 +6,7 @@ import dao.CuentaDAO;
 
 
 /**
- * Vista del registro del curso
+ * Vista del registro de una cuenta
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
  * @version Proyecto Programado I
  */
@@ -30,7 +30,7 @@ public class RegistrarCuenta extends javax.swing.JFrame {
   public void seleccionarClienteParaLaCuenta(){
 
     CuentaDAO dao = new CuentaDAO();
-    cbxCliente.setModel(dao.llenarComboBoxRegistroCuenta());
+    cbxCliente.setModel(dao.llenarComboBox());
   }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

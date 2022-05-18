@@ -2,12 +2,12 @@ package vista;
 
 
 /**
- * Vista para consultar el listado de clientes ordenados
+ * Vista para consultar las ganancias obtenidas a partir de las comisiones para el universo de cuentas
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
  * @version Proyecto Programado I
  */
-public class ConsultarClientesOrdenados extends javax.swing.JFrame {
-  public ConsultarClientesOrdenados() {
+public class ConsultarGananciasComisionesTotalizado extends javax.swing.JFrame {
+  public ConsultarGananciasComisionesTotalizado() {
     initComponents();
   }
 
@@ -19,8 +19,9 @@ public class ConsultarClientesOrdenados extends javax.swing.JFrame {
         panelConsulta = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaClientesOrdenados = new javax.swing.JTable();
+        tablaComisiones = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
+        btnCalcularTotalComisiones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -28,9 +29,9 @@ public class ConsultarClientesOrdenados extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 28)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("Listado ordenado de los clientes registrados en el sistema");
+        lblTitulo.setText("Listado de todos los montos cobrados de comisiones");
 
-        tablaClientesOrdenados.setModel(new javax.swing.table.DefaultTableModel(
+        tablaComisiones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -38,13 +39,21 @@ public class ConsultarClientesOrdenados extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tablaClientesOrdenados);
+        jScrollPane1.setViewportView(tablaComisiones);
 
         btnVolver.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 10)); // NOI18N
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
+            }
+        });
+
+        btnCalcularTotalComisiones.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnCalcularTotalComisiones.setText("Calcular Total de Comisiones");
+        btnCalcularTotalComisiones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularTotalComisionesActionPerformed(evt);
             }
         });
 
@@ -64,6 +73,10 @@ public class ConsultarClientesOrdenados extends javax.swing.JFrame {
                         .addComponent(btnVolver)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(panelConsultaLayout.createSequentialGroup()
+                .addGap(321, 321, 321)
+                .addComponent(btnCalcularTotalComisiones)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelConsultaLayout.setVerticalGroup(
             panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,9 +85,11 @@ public class ConsultarClientesOrdenados extends javax.swing.JFrame {
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblTitulo)
-                .addGap(73, 73, 73)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(btnCalcularTotalComisiones)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,6 +110,10 @@ public class ConsultarClientesOrdenados extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnCalcularTotalComisionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularTotalComisionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCalcularTotalComisionesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -112,14 +131,26 @@ public class ConsultarClientesOrdenados extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultarClientesOrdenados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarGananciasComisionesTotalizado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultarClientesOrdenados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarGananciasComisionesTotalizado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultarClientesOrdenados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarGananciasComisionesTotalizado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultarClientesOrdenados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarGananciasComisionesTotalizado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -128,16 +159,17 @@ public class ConsultarClientesOrdenados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultarClientesOrdenados().setVisible(true);
+                new ConsultarGananciasComisionesTotalizado().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnCalcularTotalComisiones;
     public javax.swing.JButton btnVolver;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelConsulta;
-    public javax.swing.JTable tablaClientesOrdenados;
+    public javax.swing.JTable tablaComisiones;
     // End of variables declaration//GEN-END:variables
 }

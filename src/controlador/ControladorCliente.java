@@ -20,17 +20,29 @@ import vista.ConsultarClientesOrdenados;
 import vista.ConsultarInformacionClienteCuentas;
 import vista.RegistrarCliente;
 
+/**
+ * Abstraccion de la clase ControladorCliente
+ * Clase que controla las funciones del cliente en la interfaz grafica de usuario
+ * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
+ * @version Proyecto Programado I
+ */
 public class ControladorCliente implements ActionListener {
   Conexion conexion;
   public ResultSet rs;
   public JTable tabla;
   public RegistrarCliente vistaRegistrarCliente = new RegistrarCliente();
-  public ConsultarClientesOrdenados vistaConsultarClientesOrdenados = new ConsultarClientesOrdenados();
+  public ConsultarClientesOrdenados vistaConsultarClientesOrdenados = 
+      new ConsultarClientesOrdenados();
   public ConsultarInformacionClienteCuentas vistaConsultarInformacionClienteCuentas = 
-          new ConsultarInformacionClienteCuentas();
+      new ConsultarInformacionClienteCuentas();
   public Cliente cliente;
   public ClienteDAO clienteDao;
   
+  /**
+   * Metodo Constuctor para la vista de registrar un cliente
+   * @param pVistaRegistroCliente
+   * @param pCliente 
+   */
   public ControladorCliente(RegistrarCliente pVistaRegistroCliente, Cliente pCliente) {
     vistaRegistrarCliente = pVistaRegistroCliente;
     cliente = pCliente;
@@ -40,6 +52,12 @@ public class ControladorCliente implements ActionListener {
     this.vistaRegistrarCliente.btnVolver.addActionListener(this);
     this.vistaRegistrarCliente.btnLimpiar.addActionListener(this);
   }
+  
+  /**
+   * Metodo Constructor para la vista de consulta de clientes ordenados
+   * @param pVistaConsultarClientesOrdenados
+   * @param pModelo 
+   */
   public ControladorCliente(ConsultarClientesOrdenados pVistaConsultarClientesOrdenados, 
           ClienteDAO pModelo) {
     vistaConsultarClientesOrdenados = pVistaConsultarClientesOrdenados;
@@ -47,6 +65,12 @@ public class ControladorCliente implements ActionListener {
 
     this.vistaConsultarClientesOrdenados.btnVolver.addActionListener(this);
   }
+  
+  /**
+   * Metodo constructor para la vista de consultar la informacion del cliente de una cuenta
+   * @param pVistaConsultarInformacionClienteCuentas
+   * @param pModelo 
+   */
   public ControladorCliente(ConsultarInformacionClienteCuentas pVistaConsultarInformacionClienteCuentas, 
           ClienteDAO pModelo) {
     vistaConsultarInformacionClienteCuentas = pVistaConsultarInformacionClienteCuentas;
@@ -56,6 +80,10 @@ public class ControladorCliente implements ActionListener {
     this.vistaConsultarInformacionClienteCuentas.btnVolver.addActionListener(this);
   }
   
+  /**
+   * Metodo que le da accion a los botones de las vistas
+   * @param e 
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == vistaRegistrarCliente.btnRegistrarCliente) {
@@ -77,7 +105,10 @@ public class ControladorCliente implements ActionListener {
       this.vistaConsultarInformacionClienteCuentas.setVisible(false);
     }
   }
-  	
+  
+  /**
+   * Metodo registrarCliente() controla la vista de registro de cliente 
+   */
   public void registrarCliente() {
     try{
       String primerApellido = vistaRegistrarCliente.txtPrimerApellido.getText();
@@ -94,23 +125,24 @@ public class ControladorCliente implements ActionListener {
         clienteDao.registrarCliente(primerApellido, segundoApellido, nombre, identificacion,
         fechaNacimiento, numeroTelefonico, correoElectronico);
         JOptionPane.showMessageDialog(vistaRegistrarCliente, "Se ha creado un nuevo cliente"
-                + " en el sistema, los datos que fueron almacenados son: "
-	     	+ "\n Nombre: "+ primerApellido+ " " + segundoApellido + " " 
-	      	+ nombre + "\n Identificacion:" + identificacion + "\n Fecha Nacimiento: " 
-		+ fechaNacimiento + "\n Numero Telefonico: " +numeroTelefonico
-	    	+ "\n Correo Electronico: " + correoElectronico);
+            + " en el sistema, los datos que fueron almacenados son: "
+	    + "\n Nombre: "+ primerApellido+ " " + segundoApellido + " " 
+	    + nombre + "\n Identificacion:" + identificacion + "\n Fecha Nacimiento: " 
+	    + fechaNacimiento + "\n Numero Telefonico: " +numeroTelefonico
+	    + "\n Correo Electronico: " + correoElectronico);
       } else {
         JOptionPane.showMessageDialog(vistaRegistrarCliente, "ERROR: Por favor ingrese"
-                + " correctamente los datos segun el formato que se pide.");
-        }
-                  
-	     
-	       
+            + " correctamente los datos segun el formato que se pide.");
+        }       
     } catch (HeadlessException | IOException ex) {
         Logger.getLogger(ControladorCliente.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
   
+  /**
+   * Metodo consultarInformacionClienteParticular() controla la vista de informacion de un cliente
+   * en particular
+   */
   public void consultarInformacionClienteParticular(){
     String cliente = vistaConsultarInformacionClienteCuentas.cbxClientes.getSelectedItem().
         toString();
@@ -126,13 +158,16 @@ public class ControladorCliente implements ActionListener {
         dfm.addRow(new Object[] {rs.getString("Cliente_ID"), rs.getInt("Identificacion"),
         rs.getString("PrimerApellido"),rs.getString("SegundoApellido"), rs.getString("Nombre"),
         rs.getString("FechaNacimiento"), rs.getString("NumTelefonico"), rs.getString("Correo"),
-        rs.getInt("Numero_Cuenta"), rs.getString("Estado")});
+        encriptacion.Encriptado.codificarNumeros(rs.getString("Numero_Cuenta")), rs.getString("Estado")});
       }    
     } catch (SQLException ex) {
       JOptionPane.showMessageDialog(null,ex); 
     }
   }
-
+  
+  /**
+   * Metodo limpiarCampos() limpia los campos de texto de la ventana de registro de cliente
+   */
   public void limpiarCampos() {
     vistaRegistrarCliente.txtPrimerApellido.setText("");
     vistaRegistrarCliente.txtSegundoApellido.setText("");

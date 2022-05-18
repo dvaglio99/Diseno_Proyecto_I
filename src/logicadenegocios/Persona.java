@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logicadenegocios;
 
-import java.util.Date;
-
+/**
+ * Abstraccion de la clase Persona
+ * Estructura de las personas.
+ * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
+ * @version Proyecto Programado I
+ */
 public abstract class Persona {
   private String primerApellido;
   private String segundoApellido;
@@ -16,13 +15,28 @@ public abstract class Persona {
   private String numTelefonico;
   private String correoElectronico;
 
+  /**
+   * Metodo constructor vacio
+   */
   public Persona() {
 	  
   }
-  public Persona(String pPrimerApellido, String pSegundoApellido, String pNombre, String pIdentificacion, String pFechaNacimiento, String pNumTelefonico,
-		String pCorreoElectronico) {
-	setPrimerApellido(pPrimerApellido);
-	setSegundoApellido(pSegundoApellido);
+  
+  /**
+   * Metodo Constructor
+   * @param pPrimerApellido
+   * @param pSegundoApellido
+   * @param pNombre
+   * @param pIdentificacion
+   * @param pFechaNacimiento
+   * @param pNumTelefonico
+   * @param pCorreoElectronico 
+   */
+  public Persona(String pPrimerApellido, String pSegundoApellido, String pNombre, 
+      String pIdentificacion, String pFechaNacimiento, String pNumTelefonico,
+      String pCorreoElectronico) {
+    setPrimerApellido(pPrimerApellido);
+    setSegundoApellido(pSegundoApellido);
     setNombre(pNombre);
     setIdentificacion(pIdentificacion);
     setFechaNacimiento(pFechaNacimiento);
@@ -30,6 +44,9 @@ public abstract class Persona {
     setCorreoElectronico(pCorreoElectronico);
   }
 
+  /**
+   * Metodo abstracto de registrar cuenta
+   */
   public abstract void registrarCuenta();
   
   public void consultarTipoCambio() {
@@ -92,15 +109,19 @@ public abstract class Persona {
     this.correoElectronico = pCorreoElectronico;
   }
 
+  /**
+   * Metodo que devuelve la informacion de una persona
+   * @return 
+   */
   public String toString() {
     String mensaje = "";
-	mensaje += "\nPrimer apellido: " + getPrimerApellido();
-	mensaje +="\nSegundo apellido: " + getSegundoApellido();
-	mensaje +="\nNombre: " +getNombre();
-	mensaje +="\nIdentificacion: " +getIdentificacion();
-	mensaje +="\nFecha de nacimiento: " +getFechaNacimiento();
-	mensaje +="\nNumero Telefonico: " +getNumTelefonico();
-	mensaje +="\nCorreo Electronico: " +getCorreoElectronico();
-	return mensaje;
+    mensaje += "\nPrimer apellido: " + getPrimerApellido();
+    mensaje +="\nSegundo apellido: " + getSegundoApellido();
+    mensaje +="\nNombre: " +getNombre();
+    mensaje +="\nIdentificacion: " +getIdentificacion();
+    mensaje +="\nFecha de nacimiento: " +getFechaNacimiento();
+    mensaje +="\nNumero Telefonico: " +getNumTelefonico();
+    mensaje +="\nCorreo Electronico: " +getCorreoElectronico();
+    return mensaje;
   }
 }

@@ -2,7 +2,7 @@
 package vista;
 
 /**
- * Vista del menu de modificaciones a la informacion
+ * Vista del menu de operaciones
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
  * @version Proyecto Programado I
  */

@@ -2,17 +2,21 @@ package controlador;
 
 import dao.CuentaDAO;
 import dao.OperacionesDAO;
+
 import vista.MenuModificaciones;
+import vista.RealizarDeposito;
+import vista.RealizarRetiro;
+import vista.RealizarTransferencia;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vista.RealizarDeposito;
-import vista.RealizarRetiro;
+
 
 /**
  * Abstraccion de la clase ControladorMenuModificaciones
  * Utiliza las funcionalidades del menu de modificaciones
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
+ * @version Proyecto Programado I
  */
 public class ControladorMenuModificaciones implements ActionListener {  
   public MenuModificaciones vista;
@@ -28,7 +32,7 @@ public class ControladorMenuModificaciones implements ActionListener {
     this.vista.btnRealizarDepositoCambioMoneda.addActionListener(this);
     this.vista.btnRealizarRetiroColones.addActionListener(this);
     this.vista.btnRealizarRetiroCompraMoneda.addActionListener(this);
-
+    this.vista.btnRealizarTransferencia.addActionListener(this);
     this.vista.btnVolver.addActionListener(this);
   }
 
@@ -42,10 +46,13 @@ public class ControladorMenuModificaciones implements ActionListener {
       realizarDepositoColones();
     }
     if (e.getSource() == vista.btnRealizarDepositoCambioMoneda) {
-      eliminarCursoDePlan();
+      realizarDepositoCambioMoneda();
     }
     if (e.getSource() == vista.btnRealizarRetiroColones) {
       realizarRetiroColones();
+    }
+    if (e.getSource() == vista.btnRealizarTransferencia) {
+      realizarTransferencia();
     }
     if (e.getSource() == vista.btnVolver) {
       this.vista.setVisible(false);
@@ -53,7 +60,7 @@ public class ControladorMenuModificaciones implements ActionListener {
   }
   
   /**
-   * Metodo que abre la ventana para eliminar el requisito de un curso
+   * Metodo que abre la ventana para realizar un deposito en colones
    */
   public void realizarDepositoColones() {
     RealizarDeposito depositar = new RealizarDeposito();
@@ -65,17 +72,14 @@ public class ControladorMenuModificaciones implements ActionListener {
   }
   
   /**
-   * Metodo que despliega la vista para elminar la relacion de un curso con un plan de estudio
+   * Metodo que abre la ventana para realizar un deposito con cambio de moneda
    */
-  public void eliminarCursoDePlan() {
-    /*EliminarCursoDePlan eliminar = new EliminarCursoDePlan();
-    CursoDAO dao = new CursoDAO();
-    ControladorCurso controlador = new ControladorCurso(eliminar, dao);
-    controlador.vistaEliminarCursoDePlan.setVisible(true); */
+  public void realizarDepositoCambioMoneda() {
+    
   }
   
   /**
-   * Metodo que abre la ventana que para eliminar un curso
+   * Metodo que abre la ventana que para realizar un retiro en colones
    */
   public void realizarRetiroColones() { 
     RealizarRetiro retirar = new RealizarRetiro();
@@ -83,9 +87,16 @@ public class ControladorMenuModificaciones implements ActionListener {
     OperacionesDAO operacionDao = new OperacionesDAO();
     ControladorOperaciones controlador = new ControladorOperaciones(retirar, cuentaDao, operacionDao);
     controlador.vistaRealizarRetiro.setVisible(true);
-   /* EliminarCurso eliminar = new EliminarCurso();
-    CursoDAO dao = new CursoDAO();
-    ControladorCurso controlador = new ControladorCurso(eliminar, dao);
-    controlador.vistaEliminarCurso.setVisible(true); */
+  }
+  
+  /**
+   * Metodo que abre la ventana que para realizar una transferencia en colones
+   */
+  public void realizarTransferencia(){
+    RealizarTransferencia transferir = new RealizarTransferencia();
+    CuentaDAO cuentaDao = new CuentaDAO();
+    OperacionesDAO operacionDao = new OperacionesDAO();
+    ControladorOperaciones controlador = new ControladorOperaciones(transferir, cuentaDao, operacionDao);
+    controlador.vistaRealizarTransferencia.setVisible(true);
   }
 }

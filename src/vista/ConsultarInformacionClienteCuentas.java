@@ -4,7 +4,7 @@ import dao.ClienteDAO;
 
 
 /**
- * Vista para consultar el plan de estudio de un curso en particular
+ * Vista para consultar la informacion de un cliente y su(s) cuenta(s)
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
  * @version Proyecto Programado I
  */
@@ -15,7 +15,7 @@ public class ConsultarInformacionClienteCuentas extends javax.swing.JFrame {
   }
 
   /**
-   * Metodo para llenar el ComboBox de escuelas
+   * Metodo para llenar el ComboBox de clientes
    */
   public void llenarCbxClientes() {
     ClienteDAO clienteDao = new ClienteDAO();

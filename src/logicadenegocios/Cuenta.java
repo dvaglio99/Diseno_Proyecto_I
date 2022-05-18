@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package logicadenegocios;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
- * @author chava
+ * Abstraccion de la clase Cuenta
+ * Estructura de las cuentas.
+ * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
+ * @version Proyecto Programado I
  */
 public class Cuenta {
     
@@ -22,7 +20,15 @@ public class Cuenta {
   private Cliente duenio;
   private ArrayList<Operacion> operaciones;
   
-  
+  /**
+   * Metodo Constructor
+   * @param pNumeroCuenta
+   * @param pPIN
+   * @param pFechaCreacion
+   * @param pSaldo
+   * @param pEstado
+   * @param pDuenio 
+   */
   public Cuenta(int pNumeroCuenta, String pPIN, String pFechaCreacion, double pSaldo, String pEstado, Cliente pDuenio) {
     setNumeroCuenta(pNumeroCuenta);
     setPIN(pPIN);
@@ -32,26 +38,20 @@ public class Cuenta {
     setCliente(pDuenio);
     operaciones = new ArrayList<Operacion>();
   }
-
-    public Cuenta() {
-    }
   
-  public String calcularTotalComisionDepositoRetiro() {
-	return "";
+  /**
+   * Metodo constructor vacio
+   */
+  public Cuenta() {
   }
   
-  public String calcularTotalComisionDeposito() {
-	return "";
-  }
-  
-  public String calcularTotalComisionRetiro() {
-    return "";
-  }
-  
-  public void modificarPIN() {
-	  
-  }
-  
+  /**
+   * metodo que agrega una operacion
+   * @param pFecha
+   * @param pTipoOperacion
+   * @param pCargoOperacion
+   * @param pMonto 
+   */
   public void agregarOperacion(Date pFecha, String pTipoOperacion, boolean pCargoOperacion, double pMonto) {
     Operacion op = new Operacion(pFecha, pTipoOperacion, pCargoOperacion, pMonto);
     operaciones.add(op);
@@ -104,15 +104,19 @@ public class Cuenta {
 	  this.duenio = pDuenio;
   }
   
+  /**
+   * Metodo que devuelve la informacion correspondiente a una cuenta
+   * @return 
+   */
   public String toString() {
-	  String mensaje = "";
-	  mensaje += "\n Numero de cuenta: " + getNumeroCuenta();
-	  mensaje += "\n PIN: " +getPIN();
-	  mensaje += "\n Fecha de Creacion: " + getFechaCreacion();
-	  mensaje += "\n Saldo: " + getSaldo();
-	  mensaje += "\n Estado: " + getEstado();
-	  mensaje += "\n Duenio: " + getCliente();
-	  return mensaje;
+    String mensaje = "";
+    mensaje += "\n Numero de cuenta: " + getNumeroCuenta();
+    mensaje += "\n PIN: " +getPIN();
+    mensaje += "\n Fecha de Creacion: " + getFechaCreacion();
+    mensaje += "\n Saldo: " + getSaldo();
+    mensaje += "\n Estado: " + getEstado();
+    mensaje += "\n Duenio: " + getCliente();
+    return mensaje;
   }    
     
 }

@@ -1,11 +1,9 @@
 package dao;
 
-import java.io.IOException;
 
-import logicadenegocios.Cliente;
-import validaciones.Validaciones;
 import conexion.Conexion;
 
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,15 +14,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 
-
-
+/**
+ * Abstraccion de la clase ClienteDAO
+ * Utiliza los procedimientos correspondientes a los clientes.
+ * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
+ * @version Proyecto Programado I
+ */
 public class ClienteDAO {
 	Conexion conexion;
-	
+  
+  /**
+   * Metodo Constructor
+   */
   public ClienteDAO() {
     conexion = new Conexion();
   }
 
+  /**
+   * Metodo para llenar el comboBox de las identificaciones de los clientes
+   * @return el modelo de combo box  
+   */
   public DefaultComboBoxModel llenarComboBox() {
     DefaultComboBoxModel modelo = new DefaultComboBoxModel();
     try {
@@ -38,8 +47,20 @@ public class ClienteDAO {
       return modelo;
   }
   
+  /**
+   * Metodo que registra una persona y la vez un cliente
+   * @param primerApellido
+   * @param segundoApellido
+   * @param nombre
+   * @param identificacion
+   * @param fechaNacimiento
+   * @param numeroTelefonico
+   * @param correoElectronico
+   * @throws IOException 
+   */
   public void registrarCliente(String primerApellido, String segundoApellido, String nombre,
-          String identificacion, String fechaNacimiento, String numeroTelefonico,String correoElectronico) throws IOException {
+          String identificacion, String fechaNacimiento, String numeroTelefonico,
+          String correoElectronico) throws IOException {
     PreparedStatement ps;
     Connection conect = conexion.Conexion();    		   
     try {
@@ -72,6 +93,11 @@ public class ClienteDAO {
       }
     }  
   }
+  
+  /**
+   * Metodo que consulta los clientes ordenados ascendentemente en funcion del primer apellido.
+   * @return el resultado de ejecutar el procedimiento almacenado
+   */
   public ResultSet consultarClientesOrdenados() {
     Statement ejecutor;
     ResultSet rs = null;
@@ -84,6 +110,11 @@ public class ClienteDAO {
     return rs;
   }
   
+  /**
+   * Metodo que consulta la informacion de un Cliente en particular
+   * @param pCliente
+   * @return el resultado de ejecutar el procedimiento almacenado
+   */
   public ResultSet consultarInformacionClienteParticular(String pCliente) {
     Statement ejecutor;
     ResultSet rs = null;

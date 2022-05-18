@@ -5,7 +5,7 @@ import dao.ClienteDAO;
 
 
 /**
- * Vista del registro del curso
+ * Vista del registro de un cliente
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
  * @version Proyecto Programado I
  */

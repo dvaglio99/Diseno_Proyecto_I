@@ -4,12 +4,12 @@ import dao.CuentaDAO;
 
 
 /**
- * Vista para realizar un deposito
+ * Vista para consultar el estatus de una cuenta
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
  * @version Proyecto Programado I
  */
-public class RealizarDeposito extends javax.swing.JFrame {
-  public RealizarDeposito() {
+public class ConsultarEstatusCuenta extends javax.swing.JFrame {
+  public ConsultarEstatusCuenta() {
     initComponents();
     llenarCbxCuentas();
   }
@@ -29,16 +29,11 @@ public class RealizarDeposito extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         lblNombreEscuela = new javax.swing.JLabel();
         cbxCuentas = new javax.swing.JComboBox<>();
-        btnDepositar = new javax.swing.JButton();
+        btnBuscarEstatus = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
-        lblNombreEscuela2 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         lblNombreEscuela4 = new javax.swing.JLabel();
-        btnBuscarCliente = new javax.swing.JButton();
         txtPropietarioCuenta = new javax.swing.JTextField();
-        txtMonto = new javax.swing.JTextField();
-        txtCantidadOperaciones = new javax.swing.JTextField();
-        lblNombreEscuela5 = new javax.swing.JLabel();
-        lblNumOp = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,11 +41,11 @@ public class RealizarDeposito extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 28)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("Realizar Deposito en Colones");
+        lblTitulo.setText("Consultar Estatus de una Cuenta");
 
         lblNombreEscuela.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         lblNombreEscuela.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreEscuela.setText("Seleccione un numero de cuenta existente : ");
+        lblNombreEscuela.setText("Seleccione un numero de cuenta: ");
 
         cbxCuentas.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         cbxCuentas.addActionListener(new java.awt.event.ActionListener() {
@@ -59,11 +54,11 @@ public class RealizarDeposito extends javax.swing.JFrame {
             }
         });
 
-        btnDepositar.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        btnDepositar.setText("Depositar");
-        btnDepositar.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarEstatus.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnBuscarEstatus.setText("Verificar Estatus");
+        btnBuscarEstatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDepositarActionPerformed(evt);
+                btnBuscarEstatusActionPerformed(evt);
             }
         });
 
@@ -75,95 +70,71 @@ public class RealizarDeposito extends javax.swing.JFrame {
             }
         });
 
-        lblNombreEscuela2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        lblNombreEscuela2.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreEscuela2.setText("Ingrese el monto a depositar a la cuenta:");
+        btnBuscar.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnBuscar.setText("Buscar Cuenta");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         lblNombreEscuela4.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         lblNombreEscuela4.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreEscuela4.setText("Propietario de la cuenta:");
-
-        btnBuscarCliente.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        btnBuscarCliente.setText("Buscar Cliente");
-        btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarClienteActionPerformed(evt);
-            }
-        });
-
-        lblNombreEscuela5.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        lblNombreEscuela5.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreEscuela5.setText("Cantidad de operaciones efectuadas por el cliente:");
-
-        lblNumOp.setText("OP: ");
 
         javax.swing.GroupLayout panelConsultaLayout = new javax.swing.GroupLayout(panelConsulta);
         panelConsulta.setLayout(panelConsultaLayout);
         panelConsultaLayout.setHorizontalGroup(
             panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultaLayout.createSequentialGroup()
-                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelConsultaLayout.createSequentialGroup()
+                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelConsultaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnVolver)
-                        .addGap(181, 181, 181)
-                        .addComponent(lblTitulo))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelConsultaLayout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreEscuela)
+                            .addComponent(lblNombreEscuela4))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPropietarioCuenta)
+                            .addComponent(cbxCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelConsultaLayout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnBuscarCliente)
-                            .addGroup(panelConsultaLayout.createSequentialGroup()
-                                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNombreEscuela)
-                                    .addComponent(lblNombreEscuela2)
-                                    .addComponent(lblNombreEscuela4)
-                                    .addComponent(lblNombreEscuela5))
-                                .addGap(31, 31, 31)
-                                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxCuentas, 0, 312, Short.MAX_VALUE)
-                                    .addComponent(txtPropietarioCuenta)
-                                    .addComponent(txtMonto)
-                                    .addComponent(txtCantidadOperaciones))))))
-                .addGap(168, 168, 168))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnBuscar)))
+                .addContainerGap(216, Short.MAX_VALUE))
             .addGroup(panelConsultaLayout.createSequentialGroup()
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelConsultaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblNumOp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(332, 332, 332)
+                        .addComponent(btnBuscarEstatus))
                     .addGroup(panelConsultaLayout.createSequentialGroup()
-                        .addGap(342, 342, 342)
-                        .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(187, 187, 187)
+                        .addComponent(lblTitulo)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelConsultaLayout.setVerticalGroup(
             panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultaLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTitulo))
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(lblTitulo)
                 .addGap(18, 18, 18)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEscuela, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscarCliente)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEscuela4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPropietarioCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCantidadOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombreEscuela5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombreEscuela2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
-                .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(lblNumOp, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(btnBuscarEstatus)
+                .addGap(57, 57, 57))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,7 +145,9 @@ public class RealizarDeposito extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,17 +157,17 @@ public class RealizarDeposito extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCuentasActionPerformed
 
-    private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
+    private void btnBuscarEstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEstatusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDepositarActionPerformed
+    }//GEN-LAST:event_btnBuscarEstatusActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarClienteActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,22 +186,14 @@ public class RealizarDeposito extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RealizarDeposito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarEstatusCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RealizarDeposito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarEstatusCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RealizarDeposito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarEstatusCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RealizarDeposito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarEstatusCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -241,25 +206,20 @@ public class RealizarDeposito extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RealizarDeposito().setVisible(true);
+                new ConsultarEstatusCuenta().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnBuscarCliente;
-    public javax.swing.JButton btnDepositar;
+    public javax.swing.JButton btnBuscar;
+    public javax.swing.JButton btnBuscarEstatus;
     public javax.swing.JButton btnVolver;
     public javax.swing.JComboBox<String> cbxCuentas;
     private javax.swing.JLabel lblNombreEscuela;
-    private javax.swing.JLabel lblNombreEscuela2;
     private javax.swing.JLabel lblNombreEscuela4;
-    private javax.swing.JLabel lblNombreEscuela5;
-    public javax.swing.JLabel lblNumOp;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelConsulta;
-    public javax.swing.JTextField txtCantidadOperaciones;
-    public javax.swing.JTextField txtMonto;
     public javax.swing.JTextField txtPropietarioCuenta;
     // End of variables declaration//GEN-END:variables
 }

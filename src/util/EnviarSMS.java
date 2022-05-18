@@ -8,13 +8,17 @@ import com.twilio.type.PhoneNumber;
  * Abstraccion de la clase EnviarSMS
  * 
  * @author Daniel Vaglio Fallas y Jafet Chavarria Moreno
- * @version Proyecto Programado II
+ * @version Proyecto Programado I
  */
 public class EnviarSMS {
   // Find your Account Sid and Token at twilio.com/user/account
   private static final String ACCOUNT_SID = "AC2cf8f610873feaa18fd83da5ae15a043";
-  private static final String AUTH_TOKEN = "9c9b37ffe03353c2a8442810f696e594";
+  private static final String AUTH_TOKEN = "3fee5b8b9681c6c7c3e4da372d41f16b";
   
+  /**
+   * Metodo que genera una palabra clave aleatoria
+   * @return la palabra clave generada
+   */
   public static String generarPalabra(){
   //La variable palabra almacena el resultado final
   String palabra = "";
@@ -29,6 +33,11 @@ public class EnviarSMS {
   return palabra;
   }
   
+  /**
+   * Metodo que envia el mensaje al numero de telefono y con la palabra clave
+   * @param pTelefono
+   * @param pPalabraClave 
+   */
   public static void enviarSMS(String pTelefono, String pPalabraClave){
   Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     Message message = Message.creator(new PhoneNumber("+506"+pTelefono), 

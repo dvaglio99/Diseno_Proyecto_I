@@ -26,7 +26,12 @@ public class MenuConsultasAdicionales extends javax.swing.JFrame {
         btnConsultarCuentasOrdenadas = new javax.swing.JButton();
         btnConsultarInformacionCliente = new javax.swing.JButton();
         btnConsultarInformacionCuentaParticular = new javax.swing.JButton();
-        btnConsultarListaDeCursos = new javax.swing.JButton();
+        btnConsultarSaldoActual = new javax.swing.JButton();
+        btnConsultarEstadoCuenta = new javax.swing.JButton();
+        btnConsultarEstadoCuentaDivisaExtranjera = new javax.swing.JButton();
+        btnConsultarEstatusCuenta = new javax.swing.JButton();
+        btnConsultarGananciasComisionesTotalizado = new javax.swing.JButton();
+        btnConsultarGananciasComisionesCuentaEspecifico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,11 +81,51 @@ public class MenuConsultasAdicionales extends javax.swing.JFrame {
             }
         });
 
-        btnConsultarListaDeCursos.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
-        btnConsultarListaDeCursos.setText("Consultar Lista de Cursos");
-        btnConsultarListaDeCursos.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultarSaldoActual.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnConsultarSaldoActual.setText("Consultar Saldo de una Cuenta");
+        btnConsultarSaldoActual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarListaDeCursosActionPerformed(evt);
+                btnConsultarSaldoActualActionPerformed(evt);
+            }
+        });
+
+        btnConsultarEstadoCuenta.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnConsultarEstadoCuenta.setText("Consultar Estado de una Cuenta");
+        btnConsultarEstadoCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarEstadoCuentaActionPerformed(evt);
+            }
+        });
+
+        btnConsultarEstadoCuentaDivisaExtranjera.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnConsultarEstadoCuentaDivisaExtranjera.setText("Consultar Estado de una Cuenta (divisa extranjera)");
+        btnConsultarEstadoCuentaDivisaExtranjera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarEstadoCuentaDivisaExtranjeraActionPerformed(evt);
+            }
+        });
+
+        btnConsultarEstatusCuenta.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnConsultarEstatusCuenta.setText("Consultar Estatus de una Cuenta");
+        btnConsultarEstatusCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarEstatusCuentaActionPerformed(evt);
+            }
+        });
+
+        btnConsultarGananciasComisionesTotalizado.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnConsultarGananciasComisionesTotalizado.setText("Consultar Ganancias del Banco Producto del Cobro de Comisiones Totalizado");
+        btnConsultarGananciasComisionesTotalizado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarGananciasComisionesTotalizadoActionPerformed(evt);
+            }
+        });
+
+        btnConsultarGananciasComisionesCuentaEspecifico.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        btnConsultarGananciasComisionesCuentaEspecifico.setText("Consultar Ganancias del Banco Producto del Cobro de Comisiones de una Cuenta en Especifico");
+        btnConsultarGananciasComisionesCuentaEspecifico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarGananciasComisionesCuentaEspecificoActionPerformed(evt);
             }
         });
 
@@ -91,48 +136,62 @@ public class MenuConsultasAdicionales extends javax.swing.JFrame {
             .addGroup(panelMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnConsultarGananciasComisionesTotalizado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelMenuLayout.createSequentialGroup()
                         .addComponent(btnVolver)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(135, 135, 135)
                         .addComponent(lblTitulo)
-                        .addGap(135, 135, 135))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnConsultarSaldoActual, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelMenuLayout.createSequentialGroup()
                                 .addComponent(btnConsultarClientesOrdenados, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
+                            .addGroup(panelMenuLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnConsultarCuentasOrdenadas)))
+                                .addComponent(btnConsultarCuentasOrdenadas))
+                            .addComponent(btnConsultarEstatusCuenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnConsultarInformacionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnConsultarInformacionCuentaParticular)
-                            .addComponent(btnConsultarInformacionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnConsultarListaDeCursos)
-                .addGap(238, 238, 238))
+                            .addComponent(btnConsultarEstadoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConsultarEstadoCuentaDivisaExtranjera)))
+                    .addComponent(btnConsultarGananciasComisionesCuentaEspecifico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTitulo)
-                .addGap(35, 35, 35)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(lblTitulo)))
+                .addGap(26, 26, 26)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsultarClientesOrdenados, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConsultarInformacionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConsultarInformacionCuentaParticular, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnConsultarCuentasOrdenadas, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(btnConsultarListaDeCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                    .addComponent(btnConsultarCuentasOrdenadas, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultarInformacionCuentaParticular, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConsultarSaldoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultarEstadoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConsultarEstadoCuentaDivisaExtranjera, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultarEstatusCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnConsultarGananciasComisionesTotalizado, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnConsultarGananciasComisionesCuentaEspecifico, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,9 +228,29 @@ public class MenuConsultasAdicionales extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConsultarInformacionCuentaParticularActionPerformed
 
-    private void btnConsultarListaDeCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarListaDeCursosActionPerformed
+    private void btnConsultarSaldoActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarSaldoActualActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnConsultarListaDeCursosActionPerformed
+    }//GEN-LAST:event_btnConsultarSaldoActualActionPerformed
+
+    private void btnConsultarEstadoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEstadoCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarEstadoCuentaActionPerformed
+
+    private void btnConsultarEstadoCuentaDivisaExtranjeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEstadoCuentaDivisaExtranjeraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarEstadoCuentaDivisaExtranjeraActionPerformed
+
+    private void btnConsultarEstatusCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEstatusCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarEstatusCuentaActionPerformed
+
+    private void btnConsultarGananciasComisionesTotalizadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarGananciasComisionesTotalizadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarGananciasComisionesTotalizadoActionPerformed
+
+    private void btnConsultarGananciasComisionesCuentaEspecificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarGananciasComisionesCuentaEspecificoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarGananciasComisionesCuentaEspecificoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,9 +291,14 @@ public class MenuConsultasAdicionales extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnConsultarClientesOrdenados;
     public javax.swing.JButton btnConsultarCuentasOrdenadas;
+    public javax.swing.JButton btnConsultarEstadoCuenta;
+    public javax.swing.JButton btnConsultarEstadoCuentaDivisaExtranjera;
+    public javax.swing.JButton btnConsultarEstatusCuenta;
+    public javax.swing.JButton btnConsultarGananciasComisionesCuentaEspecifico;
+    public javax.swing.JButton btnConsultarGananciasComisionesTotalizado;
     public javax.swing.JButton btnConsultarInformacionCliente;
     public javax.swing.JButton btnConsultarInformacionCuentaParticular;
-    public javax.swing.JButton btnConsultarListaDeCursos;
+    public javax.swing.JButton btnConsultarSaldoActual;
     public javax.swing.JButton btnVolver;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelMenu;
