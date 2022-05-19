@@ -13,11 +13,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import vista.RealizarDepositoDolares;
+import webservice_banco.TipoCambioDolar;
 
 
 /**
@@ -30,6 +33,7 @@ public class ControladorOperaciones implements ActionListener {
   public OperacionesDAO operacionDao; 
   public CuentaDAO cuentaDao;
   public RealizarDeposito vistaRealizarDeposito = new  RealizarDeposito();
+  public RealizarDepositoDolares vistaRealizarDepositoDolares = new RealizarDepositoDolares();
   public RealizarRetiro vistaRealizarRetiro = new RealizarRetiro();
   public RealizarTransferencia vistaRealizarTransferencia = new RealizarTransferencia();
   public ConsultarGananciasComisionesTotalizado vistaConsultarGananciasComisionesTotalizado =
@@ -37,6 +41,7 @@ public class ControladorOperaciones implements ActionListener {
   public ConsultarGananciasComisionesCuentaParticular 
       vistaConsultarGananciasComisionesCuentaParticular = 
       new ConsultarGananciasComisionesCuentaParticular();
+  public TipoCambioDolar tipoCambio = new TipoCambioDolar();
   ResultSet rs;
   ResultSet rs2;
   
@@ -56,6 +61,24 @@ public class ControladorOperaciones implements ActionListener {
     this.vistaRealizarDeposito.btnDepositar.addActionListener(this);
     this.vistaRealizarDeposito.txtPropietarioCuenta.setEditable(false);
     this.vistaRealizarDeposito.txtCantidadOperaciones.setEditable(false);
+  }
+  
+  /**
+   * Metodo constructor para la vista de Realizar Deposito en colones
+   * @param pVistaRealizarDeposito
+   * @param pCuentaDao
+   * @param pOperacionesDao 
+   */  
+  public ControladorOperaciones(RealizarDepositoDolares pVistaRealizarDepositoDolares,
+      CuentaDAO pCuentaDao, OperacionesDAO pOperacionesDao) {
+    vistaRealizarDepositoDolares = pVistaRealizarDepositoDolares;
+    cuentaDao = pCuentaDao;
+    operacionDao = pOperacionesDao;
+    this.vistaRealizarDepositoDolares.btnBuscarCliente.addActionListener(this);
+    this.vistaRealizarDepositoDolares.btnVolver.addActionListener(this);
+    this.vistaRealizarDepositoDolares.btnDepositar.addActionListener(this);
+    this.vistaRealizarDepositoDolares.txtPropietarioCuenta.setEditable(false);
+    this.vistaRealizarDepositoDolares.txtCantidadOperaciones.setEditable(false);
   }
   
   /**
@@ -151,6 +174,12 @@ public class ControladorOperaciones implements ActionListener {
     if (e.getSource() == vistaRealizarDeposito.btnDepositar) {
       realizarDeposito();
     }
+    if(e.getSource() == vistaRealizarDepositoDolares.btnBuscarCliente) {
+      buscarNombreClienteDepositoDolares();
+    }
+    if(e.getSource() == vistaRealizarDepositoDolares.btnDepositar) {
+      realizarDepositoEnDolares();
+    }
     if(e.getSource() == vistaRealizarRetiro.btnBuscarCliente) {
       buscarNombreClienteRetiro();
     }
@@ -229,6 +258,29 @@ public class ControladorOperaciones implements ActionListener {
     }
   }
   
+  /**
+   * Metodo que busca el nombre del cliente para realizar un deposito en dolares
+  */  
+  public void buscarNombreClienteDepositoDolares() {
+    int numeroCuenta = Integer.parseInt(vistaRealizarDepositoDolares.cbxCuentas.getSelectedItem().
+        toString());
+    rs = operacionDao.buscarNombreCliente(numeroCuenta);
+    rs2 = operacionDao.verificarSiCobrarComisionDeposito(numeroCuenta);
+    try {
+      if (rs.next()) {
+        vistaRealizarDepositoDolares.txtPropietarioCuenta.setText(rs.getString(1)+ " " + rs.getString(2)+
+        " " + rs.getString(3));
+      }
+      if (rs2.next()){
+        vistaRealizarDepositoDolares.txtCantidadOperaciones.setText(rs2.getString(1));
+      } else{
+        vistaRealizarDepositoDolares.txtCantidadOperaciones.setText("0");
+      }
+      
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null,ex); 
+    }
+  }
   /**
    * Metodo que busca el nombre del cliente para realizar un retiro
   */ 
@@ -387,6 +439,52 @@ public class ControladorOperaciones implements ActionListener {
                 JOptionPane.showMessageDialog(vistaRealizarDeposito, "Estimado usuario, se han depositado "
           + " correctamente "+ montoDeposito+" colones\n" +
           "El monto real depositado a su cuenta "+numeroCuenta+" es de "+montoDeposito+" colones\n"+
+          "El monto cobrado por concepto de comisión fue de 0.00 colones");
+            }
+        }  
+      } catch (SQLException ex) {
+            Logger.getLogger(ControladorOperaciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+  }
+  
+  public void realizarDepositoEnDolares() {
+    ResultSet rs3;
+    String montoValidacion = vistaRealizarDepositoDolares.txtMonto.getText();
+    
+    Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioCompra());
+    int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+    
+    if (validaciones.Validaciones.validarMontoSinDecimal(montoValidacion) != true){
+      
+      JOptionPane.showMessageDialog(vistaRealizarDepositoDolares, "ERROR: no sido posible validar el monto:"
+          + "  " + montoValidacion);
+        
+    } else {
+      int montoDeposito = Integer.parseInt(montoValidacion);
+      int montoDepositoEnDolares = montoDeposito*tipoDeCambioDolarConvertidoAInt;
+      int montoComision = (int) (montoDepositoEnDolares * 0.02);
+      int numeroCuenta = Integer.parseInt(vistaRealizarDepositoDolares.cbxCuentas.getSelectedItem()
+         .toString());
+      operacionDao.registrarDeposito(montoDepositoEnDolares, numeroCuenta);
+      rs3 = operacionDao.obtenerUltimaOperacion();
+      try {
+        if (rs3.next()){
+            vistaRealizarDepositoDolares.lblNumOp.setText(rs3.getString(1));
+            int numeroOperacion = Integer.parseInt(vistaRealizarDepositoDolares.lblNumOp.getText());
+            int numeroCantidadOperacionesEfectuadas = Integer.parseInt(vistaRealizarDepositoDolares.
+               txtCantidadOperaciones.getText());
+            if (numeroCantidadOperacionesEfectuadas >= 3) {
+              operacionDao.cobrarComision(montoComision, numeroCuenta, numeroOperacion);
+              JOptionPane.showMessageDialog(vistaRealizarDepositoDolares, "Según el Banco Central de Costa Rica el Tipo de Cambio de Compra del Dólar es "
+                + tipoDeCambioDolar+" para hoy "+ LocalDate.now().toString() + "\n" +
+                "El monto real depositado a su cuenta "+numeroCuenta+" es de "+montoDepositoEnDolares+" después de la conversión a dólares a colones\n"+
+                "El monto cobrado por concepto de comisión fue de "+montoComision+" colones, que " +
+          "     fueron rebajados automáticamente de su saldo actual");
+            } else {
+                JOptionPane.showMessageDialog(vistaRealizarDepositoDolares, "Según el Banco Central de Costa Rica el Tipo de Cambio de Compra del Dólar es "
+               + tipoDeCambioDolar+" a día de hoy\n" +
+          "El monto real depositado a su cuenta "+numeroCuenta+" es de "+montoDepositoEnDolares+" después de la conversión de dólares a colones\n"+
           "El monto cobrado por concepto de comisión fue de 0.00 colones");
             }
         }  

@@ -10,6 +10,7 @@ import vista.RealizarTransferencia;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vista.RealizarDepositoDolares;
 
 
 /**
@@ -75,6 +76,12 @@ public class ControladorMenuModificaciones implements ActionListener {
    * Metodo que abre la ventana para realizar un deposito con cambio de moneda
    */
   public void realizarDepositoCambioMoneda() {
+      RealizarDepositoDolares depositar = new RealizarDepositoDolares();
+      CuentaDAO cuentaDao = new CuentaDAO();
+      OperacionesDAO operacionDao = new OperacionesDAO();
+      ControladorOperaciones controlador = new ControladorOperaciones(depositar, cuentaDao, 
+          operacionDao);
+      controlador.vistaRealizarDepositoDolares.setVisible(true);
     
   }
   
