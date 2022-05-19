@@ -23,6 +23,9 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import vista.ConsultaEstadoCuentaDivisaExtranjera;
+import vista.ConsultarSaldoCuentaDivisaExtranjera;
+import webservice_banco.TipoCambioDolar;
 
 
 /**
@@ -42,9 +45,14 @@ public class ControladorCuenta implements ActionListener {
   public ConsultarInformacionCuentas vistaConsultarInformacionCuentas = 
     new ConsultarInformacionCuentas();
   public ConsultarSaldoCuenta vistaConsultarSaldoCuenta = new ConsultarSaldoCuenta();
+  public ConsultarSaldoCuentaDivisaExtranjera vistaConsultarSaldoCuentaDivisaExtranjera =
+      new ConsultarSaldoCuentaDivisaExtranjera();
   public ConsultaEstadoCuenta vistaConsultaEstadoCuenta = new ConsultaEstadoCuenta();
+  public ConsultaEstadoCuentaDivisaExtranjera vistaConsultaEstadoCuentaDivisaExtranjera =
+      new ConsultaEstadoCuentaDivisaExtranjera();
   public ConsultarEstatusCuenta vistaConsultarEstatusCuenta = new ConsultarEstatusCuenta();
   public CambiarPIN vistaCambiarPIN = new CambiarPIN();
+  public TipoCambioDolar tipoCambio = new TipoCambioDolar();
   public Cuenta cuenta;
   public CuentaDAO cuentaDao;
   public OperacionesDAO operacionDao;
@@ -127,6 +135,25 @@ public class ControladorCuenta implements ActionListener {
   }
   
   /**
+   * Metodo constructor para la vista de consulta del saldo de una cuenta en divisa extranjera
+   * @param pVistaConsultarSaldoCuentaDivisaExtranjera
+   * @param pCuentaDao
+   * @param pOperacionDao 
+   */
+  public ControladorCuenta(ConsultarSaldoCuentaDivisaExtranjera 
+      pVistaConsultarSaldoCuentaDivisaExtranjera, CuentaDAO pCuentaDao,
+      OperacionesDAO pOperacionDao){
+    vistaConsultarSaldoCuentaDivisaExtranjera = pVistaConsultarSaldoCuentaDivisaExtranjera;
+    cuentaDao = pCuentaDao;
+    operacionDao= pOperacionDao;
+    this.vistaConsultarSaldoCuentaDivisaExtranjera.btnBuscar.addActionListener(this);
+    this.vistaConsultarSaldoCuentaDivisaExtranjera.btnBuscarSaldo.addActionListener(this);
+    this.vistaConsultarSaldoCuentaDivisaExtranjera.btnVolver.addActionListener(this);
+    this.vistaConsultarSaldoCuentaDivisaExtranjera.txtPropietarioCuenta.setEditable(false);
+    this.vistaConsultarSaldoCuentaDivisaExtranjera.txtPINNoModificable.setEditable(false);
+  }
+  
+  /**
    * Metodo constructor para la vista de consulta del estado de una cuenta
    * @param pVistaConsultaEstadoCuenta
    * @param pCuentaDao
@@ -142,6 +169,25 @@ public class ControladorCuenta implements ActionListener {
     this.vistaConsultaEstadoCuenta.btnVolver.addActionListener(this);
     this.vistaConsultaEstadoCuenta.txtPropietarioCuenta.setEditable(false);
     this.vistaConsultaEstadoCuenta.txtPINNoModificable.setEditable(false);
+  }
+  
+  /**
+   * Metodo constructor para la vista de consulta del estado de una cuenta
+   * @param pVistaConsultaEstadoCuenta
+   * @param pCuentaDao
+   * @param pOperacionDao 
+   */
+  public ControladorCuenta(ConsultaEstadoCuentaDivisaExtranjera 
+      pVistaConsultaEstadoCuentaDivisaExtranjera, CuentaDAO pCuentaDao,
+      OperacionesDAO pOperacionDao){
+    vistaConsultaEstadoCuentaDivisaExtranjera = pVistaConsultaEstadoCuentaDivisaExtranjera;
+    cuentaDao = pCuentaDao;
+    operacionDao= pOperacionDao;
+    this.vistaConsultaEstadoCuentaDivisaExtranjera.btnBuscar.addActionListener(this);
+    this.vistaConsultaEstadoCuentaDivisaExtranjera.btnBuscarEstadoCuenta.addActionListener(this);
+    this.vistaConsultaEstadoCuentaDivisaExtranjera.btnVolver.addActionListener(this);
+    this.vistaConsultaEstadoCuentaDivisaExtranjera.txtPropietarioCuenta.setEditable(false);
+    this.vistaConsultaEstadoCuentaDivisaExtranjera.txtPINNoModificable.setEditable(false);
   }
   
   /**
@@ -192,11 +238,23 @@ public class ControladorCuenta implements ActionListener {
     if(e.getSource() == vistaConsultarSaldoCuenta.btnBuscarSaldo) {
         consultarSaldoCuenta();
     }
+    if(e.getSource() == vistaConsultarSaldoCuentaDivisaExtranjera.btnBuscar) {
+        buscarNombreClienteConsultaSaldoDivisaExtranjera();
+    }
+    if(e.getSource() == vistaConsultarSaldoCuentaDivisaExtranjera.btnBuscarSaldo) {
+        consultarSaldoCuentaDivisaExtranjera();
+    }
     if(e.getSource() == vistaConsultaEstadoCuenta.btnBuscar) {
         buscarNombreClienteConsultaEstado();
     }
     if(e.getSource() == vistaConsultaEstadoCuenta.btnBuscarEstadoCuenta) {
         consultarEstadoCuenta();
+    }
+    if(e.getSource() == vistaConsultaEstadoCuentaDivisaExtranjera.btnBuscar) {
+        buscarNombreClienteConsultaEstadoDivisaExtranjera();
+    }
+    if(e.getSource() == vistaConsultaEstadoCuentaDivisaExtranjera.btnBuscarEstadoCuenta) {
+        consultarEstadoCuentaDivisaExtranjera();
     }
     if(e.getSource() == vistaConsultarEstatusCuenta.btnBuscar) {
         buscarNombreClienteConsultaEstatus();
@@ -213,8 +271,14 @@ public class ControladorCuenta implements ActionListener {
     if (e.getSource() == vistaConsultarSaldoCuenta.btnVolver) {
         this.vistaConsultarSaldoCuenta.setVisible(false);
     }
+    if(e.getSource() == vistaConsultarSaldoCuentaDivisaExtranjera.btnVolver){
+        this.vistaConsultarSaldoCuentaDivisaExtranjera.setVisible(false);
+    }
     if (e.getSource() == vistaConsultaEstadoCuenta.btnVolver) {
         this.vistaConsultaEstadoCuenta.setVisible(false);
+    }
+    if (e.getSource() == vistaConsultaEstadoCuentaDivisaExtranjera.btnVolver) {
+        this.vistaConsultaEstadoCuentaDivisaExtranjera.setVisible(false);
     }
     if (e.getSource() == vistaConsultarEstatusCuenta.btnVolver) {
         this.vistaConsultarEstatusCuenta.setVisible(false);
@@ -373,6 +437,55 @@ public class ControladorCuenta implements ActionListener {
   }
   
   /**
+   * Metodo buscarNombreClienteConsultaSaldo() Busca el nombre del cliente para la vista de
+   * consultar Saldo de una cuenta de divisa extranjera
+   */
+  public void buscarNombreClienteConsultaSaldoDivisaExtranjera() {
+    int numeroCuenta = Integer.parseInt(vistaConsultarSaldoCuentaDivisaExtranjera.cbxCuentas.
+        getSelectedItem().toString());
+    rs = operacionDao.buscarNombreCliente(numeroCuenta);
+    rs2 = cuentaDao.buscarPIN(numeroCuenta);
+    try {
+      if (rs.next()) {
+        vistaConsultarSaldoCuentaDivisaExtranjera.txtPropietarioCuenta.setText(rs.getString(1)
+        + " " + rs.getString(2) + " " + rs.getString(3));
+      }
+      if (rs2.next()){
+        vistaConsultarSaldoCuentaDivisaExtranjera.txtPINNoModificable.setText(rs2.getString(1));
+      }
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null,ex); 
+    }
+  }
+  
+  /**
+   * Metodo consultarSaldoCuenta() consulta el saldo actual de una cuenta
+   */
+  public void consultarSaldoCuentaDivisaExtranjera(){
+    int numeroCuenta = Integer.parseInt(vistaConsultarSaldoCuenta.cbxCuentas.getSelectedItem().
+        toString());
+    String PINNoModificable = vistaConsultarSaldoCuenta.txtPINNoModificable.getText();
+    String PIN = vistaConsultarSaldoCuenta.txtPIN.getText();
+    if (PINNoModificable.equals(PIN)){
+      Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioVenta());
+      int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+      rs = operacionDao.obtenerSaldoCliente(numeroCuenta);
+      try {
+        if (rs.next()) {
+          JOptionPane.showMessageDialog(vistaConsultarSaldoCuenta, "Estimado usuario el saldo actual "
+             + "de su cuenta es "+ (rs.getInt(1)/tipoDeCambioDolarConvertidoAInt)+ " dolares.");
+        }
+      } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null,ex); 
+      }  
+    } else {
+        JOptionPane.showMessageDialog(vistaConsultarSaldoCuenta, "El PIN ingresdo no coincide con "
+            + "el PIN registrado en la cuenta. Intente de nuevo.");
+       vistaConsultarSaldoCuenta.txtPIN.setText("");
+    }
+    
+  }
+  /**
    * Metodo buscarNombreClienteConsultaEstado() Busca el nombre del cliente para la vista de
    * consultar Estado de una cuenta
    */
@@ -415,6 +528,62 @@ public class ControladorCuenta implements ActionListener {
         codificarNumeros(rs.getString("Numero_Cuenta")),rs.getString("PrimerApellido"), 
         rs.getString("SegundoApellido"), rs.getString("Nombre"),rs.getString("FechaCreacion"), 
         encriptacion.Encriptado.codificarNumeros(rs.getString("Saldo")), rs.getString("Estado")});
+      }    
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null,ex); 
+    }
+    }else {
+        JOptionPane.showMessageDialog(vistaConsultaEstadoCuenta, "El PIN ingresdo no coincide con "
+            + "el PIN registrado en la cuenta. Intente de nuevo.");
+       vistaConsultaEstadoCuenta.txtPIN.setText("");
+    }
+  }
+  
+  /**
+   * Metodo buscarNombreClienteConsultaEstado() Busca el nombre del cliente para la vista de
+   * consultar Estado de una cuenta en divisa extranjera
+   */
+  public void buscarNombreClienteConsultaEstadoDivisaExtranjera() {
+    int numeroCuenta = Integer.parseInt(vistaConsultaEstadoCuentaDivisaExtranjera.cbxCuentas.
+        getSelectedItem().toString());
+    rs = operacionDao.buscarNombreCliente(numeroCuenta);
+    rs2 = cuentaDao.buscarPIN(numeroCuenta);
+    try {
+      if (rs.next()) {
+        vistaConsultaEstadoCuentaDivisaExtranjera.txtPropietarioCuenta.setText(rs.getString(1)+ " " + rs.getString(2)+
+        " " + rs.getString(3));
+      }
+      if (rs2.next()){
+        vistaConsultaEstadoCuentaDivisaExtranjera.txtPINNoModificable.setText(rs2.getString(1));
+      }
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null,ex); 
+    }
+  }
+  
+  /**
+   * Metodo consultarEstadoCuenta() consulta el estado actual de una cuenta en divisa extranjera
+   */
+  public void consultarEstadoCuentaDivisaExtranjera(){
+    int numeroCuenta = Integer.parseInt(vistaConsultaEstadoCuentaDivisaExtranjera.cbxCuentas.
+        getSelectedItem().toString());
+    String PINNoModificable = vistaConsultaEstadoCuentaDivisaExtranjera.txtPINNoModificable.getText();
+    String PIN = vistaConsultaEstadoCuentaDivisaExtranjera.txtPIN.getText();
+    if (PINNoModificable.equals(PIN)){
+      rs = cuentaDao.consultarEstadoCuenta(numeroCuenta);
+      Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioVenta());
+      int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+      DefaultTableModel dfm = new DefaultTableModel();
+      tabla = vistaConsultaEstadoCuentaDivisaExtranjera.tablaEstadoCuenta;
+      tabla.setModel(dfm);
+      dfm.setColumnIdentifiers(new Object[]{"Numero Cuenta","Primer Apellido", "Segundo Apellido", 
+        "Nombre","Fecha Creacion","Saldo en dolares","Estado"});
+    try {
+      while (rs.next()) {
+        dfm.addRow(new Object[] {encriptacion.Encriptado.
+        codificarNumeros(rs.getString("Numero_Cuenta")),rs.getString("PrimerApellido"), 
+        rs.getString("SegundoApellido"), rs.getString("Nombre"),rs.getString("FechaCreacion"), 
+        (rs.getInt("Saldo")/tipoDeCambioDolarConvertidoAInt), rs.getString("Estado")});
       }    
     } catch (SQLException ex) {
       JOptionPane.showMessageDialog(null,ex); 

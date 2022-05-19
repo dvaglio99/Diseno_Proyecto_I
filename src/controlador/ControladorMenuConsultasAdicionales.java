@@ -22,6 +22,9 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import vista.ConsultaEstadoCuentaDivisaExtranjera;
+import vista.ConsultarSaldoCuentaDivisaExtranjera;
+import vista.ConsultarTipoCambio;
 
 /**
  * Abstraccion de la clase ControladorMenuConsultasAdicionales
@@ -44,8 +47,11 @@ public class ControladorMenuConsultasAdicionales implements ActionListener {
     this.vistaConsultasAdicionales.btnConsultarCuentasOrdenadas.addActionListener(this);
     this.vistaConsultasAdicionales.btnConsultarInformacionCuentaParticular.addActionListener(this);
     this.vistaConsultasAdicionales.btnConsultarSaldoActual.addActionListener(this); 
-    this.vistaConsultasAdicionales.btnConsultarEstadoCuenta.addActionListener(this); 
+    this.vistaConsultasAdicionales.btnConsultarSaldoDivisaExtranjera.addActionListener(this);
+    this.vistaConsultasAdicionales.btnConsultarEstadoCuenta.addActionListener(this);
+    this.vistaConsultasAdicionales.btnConsultarEstadoCuentaDivisaExtranjera.addActionListener(this);
     this.vistaConsultasAdicionales.btnConsultarEstatusCuenta.addActionListener(this);
+    this.vistaConsultasAdicionales.btnConsultarTipoDeCambio.addActionListener(this);
     this.vistaConsultasAdicionales.btnConsultarGananciasComisionesTotalizado.
         addActionListener(this);
     this.vistaConsultasAdicionales.btnConsultarGananciasComisionesCuentaEspecifico.
@@ -74,12 +80,21 @@ public class ControladorMenuConsultasAdicionales implements ActionListener {
     if (e.getSource() == vistaConsultasAdicionales.btnConsultarSaldoActual) {
       consultarSaldoActualCuenta();
     }
+    if (e.getSource() == vistaConsultasAdicionales.btnConsultarSaldoDivisaExtranjera) {
+      consultarSaldoActualCuentaDivisaExtranjera();
+    }
     if (e.getSource() == vistaConsultasAdicionales.btnConsultarEstadoCuenta) {
       consultarEstadoCuenta();
+    }
+    if (e.getSource() == vistaConsultasAdicionales.btnConsultarEstadoCuentaDivisaExtranjera) {
+      consultarEstadoCuentaDivisaExtranjera();
     }
     if (e.getSource() == vistaConsultasAdicionales.btnConsultarEstatusCuenta) {
       consultarEstatusCuenta();
     }
+    if (e.getSource() == vistaConsultasAdicionales.btnConsultarTipoDeCambio) {
+      consultarTipoCambio();
+    } 
     if (e.getSource() == vistaConsultasAdicionales.btnConsultarGananciasComisionesTotalizado){
       consultarGananciasComisionesTotalizado();
     }
@@ -178,6 +193,17 @@ public class ControladorMenuConsultasAdicionales implements ActionListener {
   }
   
   /**
+   * Metodo que abre la vista de consultar saldo actual de una cuenta en divisa extranjera
+   */
+  public void consultarSaldoActualCuentaDivisaExtranjera(){
+    ConsultarSaldoCuentaDivisaExtranjera consulta = new ConsultarSaldoCuentaDivisaExtranjera();
+    CuentaDAO cuentaDao = new CuentaDAO();
+    OperacionesDAO operacionDao = new OperacionesDAO();
+    ControladorCuenta controlador = new ControladorCuenta(consulta, cuentaDao, operacionDao);
+    controlador.vistaConsultarSaldoCuentaDivisaExtranjera.setVisible(true);
+  }
+  
+  /**
    * Metodo que abre la vista de consultar estado actual de una cuenta
    */
   public void consultarEstadoCuenta(){
@@ -186,6 +212,17 @@ public class ControladorMenuConsultasAdicionales implements ActionListener {
     OperacionesDAO operacionDao = new OperacionesDAO();
     ControladorCuenta controlador = new ControladorCuenta(consulta, cuentaDao, operacionDao);
     controlador.vistaConsultaEstadoCuenta.setVisible(true);
+  }
+  
+  /**
+   * Metodo que abre la vista de consultar estado actual de una cuenta en divisa extranjera
+   */
+  public void consultarEstadoCuentaDivisaExtranjera(){
+    ConsultaEstadoCuentaDivisaExtranjera consulta = new ConsultaEstadoCuentaDivisaExtranjera();
+    CuentaDAO cuentaDao = new CuentaDAO();
+    OperacionesDAO operacionDao = new OperacionesDAO();
+    ControladorCuenta controlador = new ControladorCuenta(consulta, cuentaDao, operacionDao);
+    controlador.vistaConsultaEstadoCuentaDivisaExtranjera.setVisible(true);
   }
   
   /**
@@ -199,6 +236,16 @@ public class ControladorMenuConsultasAdicionales implements ActionListener {
     controlador.vistaConsultarEstatusCuenta.setVisible(true);
   }
   
+  /**
+   * Metodo que abre la vista de consultar estatus actual de una cuenta
+   */
+  public void consultarTipoCambio(){
+    ConsultarTipoCambio consulta = new ConsultarTipoCambio();
+    CuentaDAO cuentaDao = new CuentaDAO();
+    OperacionesDAO operacionDao = new OperacionesDAO();
+    ControladorOperaciones controlador = new ControladorOperaciones(consulta, operacionDao);
+    controlador.vistaConsultarTipoCambio.setVisible(true);
+  }
   /**
    * Metodo que muestra las comisiones cobradas para todo el universo de cuentas
    */

@@ -11,6 +11,7 @@ import vista.RealizarTransferencia;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import vista.RealizarDepositoDolares;
+import vista.RealizarRetiroDolares;
 
 
 /**
@@ -51,6 +52,9 @@ public class ControladorMenuModificaciones implements ActionListener {
     }
     if (e.getSource() == vista.btnRealizarRetiroColones) {
       realizarRetiroColones();
+    }
+    if (e.getSource() == vista.btnRealizarRetiroCompraMoneda) {
+      realizarRetiroDolares();
     }
     if (e.getSource() == vista.btnRealizarTransferencia) {
       realizarTransferencia();
@@ -94,6 +98,17 @@ public class ControladorMenuModificaciones implements ActionListener {
     OperacionesDAO operacionDao = new OperacionesDAO();
     ControladorOperaciones controlador = new ControladorOperaciones(retirar, cuentaDao, operacionDao);
     controlador.vistaRealizarRetiro.setVisible(true);
+  }
+  
+  /**
+   * Metodo que abre la ventana que para realizar un retiro en dolares
+   */
+  public void realizarRetiroDolares() { 
+    RealizarRetiroDolares retirar = new RealizarRetiroDolares();
+    CuentaDAO cuentaDao = new CuentaDAO();
+    OperacionesDAO operacionDao = new OperacionesDAO();
+    ControladorOperaciones controlador = new ControladorOperaciones(retirar, cuentaDao, operacionDao);
+    controlador.vistaRealizarRetiroDolares.setVisible(true);
   }
   
   /**

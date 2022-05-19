@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import webservice_banco.TipoCambioDolar;
 
 /**
  * Abstraccion de la clase AplicacionConsola
@@ -132,42 +134,40 @@ public class AplicacionConsola {
       case 8:
         realizarDeposito();
         break;
-      /*case 9:
+      case 9:
         realizarDepositoCambioMoneda();
         break;
-        */
+        
       case 10:
         realizarRetiro();
         break;
-      /*case 11:
+      case 11:
         realizarRetiroCompraMoneda();
         break;
-        */
       case 12:
         realizarTransferencia();
         break;
-      /*case 13:
+      case 13:
         consultarTipoCambioCompraDivisaExtranjera();
         break;
-        */
-      /*case 14:
+        
+      case 14:
         consultarTipoCambioVentaDivisaExtranjera();
         break;
-        */
+        
       case 15:
         consultarSaldoActualCuenta();
         break;
-      /*case 16:
+      case 16:
         consultarSaldoActualCuentaDivisaExtranjera();
         break;
-        */
+        
       case 17:
         consultarEstadoCuenta();
         break;
-      /*case 18:
+      case 18:
         consultarEstadoCuentaDivisaExtranjera();
         break;
-        */
       case 19:
         consultarEstatusCuenta();
         break;
@@ -511,6 +511,66 @@ public class AplicacionConsola {
   }
   
   /**
+   * Metodo realizarDeposito() realiza un deposito en dolares a una cuenta y verifica si se cobra comision
+   * @throws IOException
+   * @throws SQLException 
+   */
+  static void realizarDepositoCambioMoneda() throws SQLException, IOException{
+    CuentaDAO cuentaDao = new CuentaDAO();
+    OperacionesDAO operacionDao = new OperacionesDAO();
+    TipoCambioDolar tipoCambio = new TipoCambioDolar();
+    ResultSet rs2;
+    ResultSet rs3;
+    ResultSet rs4;
+    Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioCompra());
+    int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+    System.out.print("\nIngrese el numero de cuenta al cual se va a depositar: ");
+    int pNumeroCuenta = Integer.parseInt(in.readLine());
+    rs3 = cuentaDao.buscarNumeroCuentaCliente(pNumeroCuenta);
+    if (rs3.next()){
+      if (rs3.getInt(1) == pNumeroCuenta){
+        System.out.print("\nIngrese el monto en dolares a depositar en la cuenta: ");
+        String pMontoValidar = in.readLine(); 
+         if (validaciones.Validaciones.validarMontoSinDecimal(pMontoValidar) == true){
+              System.out.println("Monto validado \n");
+              int montoDeposito = Integer.parseInt(pMontoValidar);
+              int montoDepositoEnDolares = montoDeposito*tipoDeCambioDolarConvertidoAInt;
+              int montoComision = (int) (montoDepositoEnDolares * 0.02);
+              operacionDao.registrarDeposito(montoDepositoEnDolares, pNumeroCuenta);
+              rs2 = operacionDao.obtenerUltimaOperacion();
+              if (rs2.next()){
+                  int ultimaOperacion = Integer.parseInt(rs2.getString(1));
+                  rs4 = operacionDao.verificarSiCobrarComisionDeposito(pNumeroCuenta);
+                  if (rs4.next()){
+                    if (rs4.getInt(1) >= 3){
+                      operacionDao.cobrarComision(montoComision, pNumeroCuenta, ultimaOperacion);
+                        System.out.println("Estimado usuario, se han depositado "
+                            + " correctamente "+ montoDeposito+" colones\n" +
+                            "El monto real depositado a su cuenta "+pNumeroCuenta+" es de "
+                            + montoDeposito+" colones\n"+ "El monto cobrado por concepto de "
+                            + "comisión fue de "+montoComision+" colones, que fueron rebajados "
+                            + "automáticamente de su saldo actual"
+                        );
+                    } else {
+                        System.out.println("Estimado usuario, se han depositado correctamente "
+                            + montoDeposito+" colones\n El monto real depositado a su cuenta "
+                            +pNumeroCuenta+" es de "+montoDeposito+" colones\n"+
+                            "El monto cobrado por concepto de comisión fue de 0.00 colones"
+                        );
+                    }
+                  }
+              }
+         } else {
+             System.out.println("Monto invalido, ingrese un numero entero");
+         }
+      } 
+    } else {
+        System.out.println("el numero de cuenta ingresado no existe en la base de datos."
+          + " Por favor, intente de nuevo.");
+      }
+  }
+  
+  /**
    * Metodo realizarRetiro() realiza un retiro de una cuenta y verifica si se cobra comision 
    * por la operacion.
    * @throws SQLException
@@ -561,6 +621,87 @@ public class AplicacionConsola {
                         } else {
                         System.out.println("Estimado usuario, el monto de este retiro "
                               + " es "+ montoRetiro +" colones\n" 
+                              +"El monto cobrado por concepto de "
+                              + "comisión fue de 0.00 colones."
+                            ); 
+                        } 
+                      }
+                    }
+                } else {
+                    System.out.println("El monto a retirar es mayor que el saldo de la cuenta. "
+                        + "Por favor, intente de nuevo.");
+                }
+              }  
+            } else {
+              System.out.println("Monto invalido, ingrese un numero entero");
+            }
+         } else{
+           System.out.println("El PIN ingresado no Coincide con el registrado en la cuenta."
+              + " Por favor, intente de nuevo"); 
+           } 
+        }  
+      }
+    } else {
+        System.out.println("el numero de cuenta ingresado no existe en la base de datos."
+          + " Por favor, intente de nuevo.");
+      }
+  }
+  
+  /**
+   * Metodo realizarRetiro() realiza un retiro de una cuenta y verifica si se cobra comision 
+   * por la operacion.
+   * @throws SQLException
+   * @throws IOException 
+   */
+  static void realizarRetiroCompraMoneda() throws SQLException, IOException{
+    CuentaDAO cuentaDao = new CuentaDAO();
+    OperacionesDAO operacionDao = new OperacionesDAO();
+    TipoCambioDolar tipoCambio = new TipoCambioDolar();
+    ResultSet rs2;
+    ResultSet rs3;
+    ResultSet rs4;
+    ResultSet rs5;
+    ResultSet rs6;
+    Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioVenta());
+    int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+    System.out.print("\nIngrese el numero de cuenta al cual se va a retirar: ");
+    int pNumeroCuenta = Integer.parseInt(in.readLine());
+    rs2 = cuentaDao.buscarNumeroCuentaCliente(pNumeroCuenta);
+    if (rs2.next()){
+      if (rs2.getInt(1) == pNumeroCuenta){
+        System.out.print("\nIngrese el PIN de la cuenta: ");
+        String PIN = in.readLine();
+        rs3 = cuentaDao.buscarPIN(pNumeroCuenta);
+        if (rs3.next()) {
+          if (rs3.getString(1).equals(PIN)){
+            System.out.println("PIN VALIDADO");
+            System.out.print("\nIngrese el monto a retirar en la cuenta: ");
+            String pMontoValidar = in.readLine(); 
+            if (validaciones.Validaciones.validarMontoSinDecimal(pMontoValidar) == true){
+              System.out.println("Monto validado \n");
+              int montoRetiro = Integer.parseInt(pMontoValidar);
+              int montoRetiroEnDolares = montoRetiro*tipoDeCambioDolarConvertidoAInt;
+              int montoComision = (int) (montoRetiroEnDolares * 0.02);
+              rs4 = operacionDao.obtenerSaldoCliente(pNumeroCuenta);
+              if(rs4.next()){
+                if(montoRetiroEnDolares <= rs4.getInt(1)){
+                    operacionDao.registrarRetiro(montoRetiroEnDolares, pNumeroCuenta);
+                    rs5 = operacionDao.obtenerUltimaOperacion();
+                    if (rs5.next()){
+                      int ultimaOperacion = Integer.parseInt(rs5.getString(1));
+                      rs6 = operacionDao.verificarSiCobrarComisionRetiro(pNumeroCuenta);
+                      if(rs6.next()){
+                        if (rs6.getInt(1) >= 3) {
+                          operacionDao.cobrarComision(montoComision, pNumeroCuenta, ultimaOperacion);
+                          System.out.println("Estimado usuario, el monto de este retiro "
+                              + " es "+ montoRetiroEnDolares +" colones\n" 
+                              +"El monto cobrado por concepto de "
+                              + "comisión fue de "+montoComision+" colones, que fueron rebajados "
+                              + "automáticamente de su saldo actual"
+                            );                        
+                        } else {
+                        System.out.println("Estimado usuario, el monto de este retiro "
+                              + " es "+ montoRetiroEnDolares +" colones\n" 
                               +"El monto cobrado por concepto de "
                               + "comisión fue de 0.00 colones."
                             ); 
@@ -675,6 +816,25 @@ public class AplicacionConsola {
     }
   }
   
+  static void consultarTipoCambioCompraDivisaExtranjera(){
+    TipoCambioDolar tipoCambio = new TipoCambioDolar();
+    Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioCompra());
+    int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+      System.out.println("El tipo de cambio del dolar en la compra"
+            + " a la fecha : " +LocalDate.now().toString()+" \nes de: " 
+            +tipoDeCambioDolarConvertidoAInt +" colones.");
+  }
+  
+  static void consultarTipoCambioVentaDivisaExtranjera(){
+    TipoCambioDolar tipoCambio = new TipoCambioDolar();
+    Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioVenta());
+    int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+      System.out.println("El tipo de cambio del dolar en la venta"
+            + " a la fecha : " +LocalDate.now().toString()+" \nes de: " 
+            +tipoDeCambioDolarConvertidoAInt +" colones.");
+   
+  }
+  
   /**
    * Metodo consultarSaldoActualCuenta() Consulta el saldo actual de una cuenta en especifico
    * @throws IOException
@@ -714,6 +874,42 @@ public class AplicacionConsola {
     }
   }
   
+  static void consultarSaldoActualCuentaDivisaExtranjera() throws SQLException, IOException{
+    CuentaDAO cuentaDao = new CuentaDAO();
+    OperacionesDAO operacionDao = new OperacionesDAO();
+    TipoCambioDolar tipoCambio = new TipoCambioDolar();
+    ResultSet rs;
+    ResultSet rs2;
+    ResultSet rs3;
+    System.out.print("\nIngrese el numero de cuenta a consultar: ");
+    int pNumeroCuenta = Integer.parseInt(in.readLine());
+    rs = cuentaDao.buscarNumeroCuentaCliente(pNumeroCuenta);   
+    if (rs.next()){
+      if (rs.getInt(1) == pNumeroCuenta){
+        System.out.print("\nIngrese el PIN de la cuenta: ");
+         String PIN = in.readLine();
+         rs2 = cuentaDao.buscarPIN(pNumeroCuenta);
+         if (rs2.next()) {
+           if (rs2.getString(1).equals(PIN)){
+             System.out.println("PIN VALIDADO");
+             Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioVenta());
+             int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+             rs3 = operacionDao.obtenerSaldoCliente(pNumeroCuenta);
+             if (rs3.next()){
+               System.out.println("Estimado Usuario, el Saldo actual de la cuenta es: "
+                   + (rs3.getInt(1)/tipoDeCambioDolarConvertidoAInt) + " dolares");
+             }
+           } else{
+           System.out.println("El PIN ingresado no Coincide con el registrado en la cuenta."
+              + " Por favor, intente de nuevo"); 
+           }
+         }
+      }
+    } else {
+      System.out.println("el numero de cuenta ingresado no existe en la base de datos."
+          + " Por favor, intente de nuevo.");
+    }
+  }
   /**
    * Metodo consultarEstadoCuenta() Consulta el estado de una cuenta en especifico
    * @throws IOException
@@ -751,6 +947,57 @@ public class AplicacionConsola {
                   + "Nombre: " + nombre + "\n"
                   + "Fecha de Creacion: " + fechaCreacion + "\n"
                   + "Saldo: " + saldo + "\n"
+                  + "Estado de la cuenta: "+estadoCuenta
+                );
+            }
+          } else{
+           System.out.println("El PIN ingresado no Coincide con el registrado en la cuenta."
+              + " Por favor, intente de nuevo"); 
+           }
+        }
+      }
+    } else {
+      System.out.println("el numero de cuenta ingresado no existe en la base de datos."
+          + " Por favor, intente de nuevo.");
+    }
+  }
+  
+  static void consultarEstadoCuentaDivisaExtranjera() throws SQLException, IOException{
+    CuentaDAO cuentaDao = new CuentaDAO();
+    TipoCambioDolar tipoCambio = new TipoCambioDolar();
+    ResultSet rs;
+    ResultSet rs2;
+    ResultSet rs3;
+    System.out.print("\nIngrese el numero de cuenta a consultar: ");
+    int pNumeroCuenta = Integer.parseInt(in.readLine());
+    rs = cuentaDao.buscarNumeroCuentaCliente(pNumeroCuenta); 
+    if (rs.next()){
+      if (rs.getInt(1) == pNumeroCuenta){
+        System.out.print("\nIngrese el PIN de la cuenta: ");
+        String PIN = in.readLine();
+        rs2 = cuentaDao.buscarPIN(pNumeroCuenta);
+        if (rs2.next()) {
+          if (rs2.getString(1).equals(PIN)){
+            System.out.println("PIN VALIDADO\n");
+            rs3 = cuentaDao.consultarEstadoCuenta(pNumeroCuenta);
+            Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioVenta());
+            int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+
+            while (rs3.next()){
+              String numeroCuenta = encriptacion.Encriptado.codificarNumeros(rs3.getString(1));
+              String primerApellido = rs3.getString(2);
+              String segundoApellido =  rs3.getString(3);
+              String nombre = rs3.getString(4);
+              String fechaCreacion = rs3.getString(5);
+              int saldo = (rs3.getInt(6)/tipoDeCambioDolarConvertidoAInt);
+              String estadoCuenta = rs3.getString(7); 
+          
+              System.out.println("Numero de cuenta: " +numeroCuenta + "\n"
+                  + "Primer Apellido: " + primerApellido + "\n"
+                  + "Segundo Apellido: "+ segundoApellido + "\n"
+                  + "Nombre: " + nombre + "\n"
+                  + "Fecha de Creacion: " + fechaCreacion + "\n"
+                  + "Saldo en Dolares: " + saldo + "\n"
                   + "Estado de la cuenta: "+estadoCuenta
                 );
             }

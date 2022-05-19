@@ -19,7 +19,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import vista.ConsultarTipoCambio;
 import vista.RealizarDepositoDolares;
+import vista.RealizarRetiroDolares;
 import webservice_banco.TipoCambioDolar;
 
 
@@ -35,7 +37,9 @@ public class ControladorOperaciones implements ActionListener {
   public RealizarDeposito vistaRealizarDeposito = new  RealizarDeposito();
   public RealizarDepositoDolares vistaRealizarDepositoDolares = new RealizarDepositoDolares();
   public RealizarRetiro vistaRealizarRetiro = new RealizarRetiro();
+  public RealizarRetiroDolares vistaRealizarRetiroDolares = new RealizarRetiroDolares();
   public RealizarTransferencia vistaRealizarTransferencia = new RealizarTransferencia();
+  public ConsultarTipoCambio vistaConsultarTipoCambio = new ConsultarTipoCambio();
   public ConsultarGananciasComisionesTotalizado vistaConsultarGananciasComisionesTotalizado =
       new ConsultarGananciasComisionesTotalizado();
   public ConsultarGananciasComisionesCuentaParticular 
@@ -105,6 +109,24 @@ public class ControladorOperaciones implements ActionListener {
     this.vistaRealizarRetiro.txtSaldoNoModificable.setEditable(false);
   }
   
+  public ControladorOperaciones(RealizarRetiroDolares pVistaRealizarRetiroDolares, CuentaDAO pCuentaDao,
+      OperacionesDAO pOperacionesDao) {
+    vistaRealizarRetiroDolares = pVistaRealizarRetiroDolares;
+    cuentaDao = pCuentaDao;
+    operacionDao = pOperacionesDao;
+    this.vistaRealizarRetiroDolares.btnBuscarCliente.addActionListener(this);
+    this.vistaRealizarRetiroDolares.btnVolver.addActionListener(this);
+    this.vistaRealizarRetiroDolares.btnRetirar.addActionListener(this);
+    this.vistaRealizarRetiroDolares.btnVerificarPIN.addActionListener(this);
+    this.vistaRealizarRetiroDolares.btnVerificarPalabraClave.addActionListener(this);
+    this.vistaRealizarRetiroDolares.txtPropietarioCuenta.setEditable(false);
+    this.vistaRealizarRetiroDolares.txtCantidadOperaciones.setEditable(false);
+    this.vistaRealizarRetiroDolares.txtPINNoModificable.setEditable(false);
+    this.vistaRealizarRetiroDolares.txtPalabraClaveNoModificable.setEditable(false);
+    this.vistaRealizarRetiroDolares.txtNumeroTelefonicoCliente.setEditable(false);
+    this.vistaRealizarRetiroDolares.txtSaldoNoModificable.setEditable(false);
+  }
+  
   /**
    * Metodo que abre la vista de realizar Transferencia
    * @param pVistaRealizarTransferencia
@@ -129,6 +151,16 @@ public class ControladorOperaciones implements ActionListener {
       this.vistaRealizarTransferencia.txtPalabraClaveNoModificable.setEditable(false);
       this.vistaRealizarTransferencia.txtPropietarioCuentaDestino.setEditable(false);
       this.vistaRealizarTransferencia.txtSaldoNoModificable.setEditable(false);
+  }
+  
+  public ControladorOperaciones(ConsultarTipoCambio pVistaConsultarTipoCambio,
+      OperacionesDAO pOperacionesDao){
+    vistaConsultarTipoCambio = pVistaConsultarTipoCambio;
+    operacionDao = pOperacionesDao;
+    this.vistaConsultarTipoCambio.btnConsultarCompra.addActionListener(this);
+    this.vistaConsultarTipoCambio.btnConsultarVenta.addActionListener(this);
+    this.vistaConsultarTipoCambio.btnVolver.addActionListener(this);
+      
   }
   
   /**
@@ -192,6 +224,18 @@ public class ControladorOperaciones implements ActionListener {
     if(e.getSource() == vistaRealizarRetiro.btnRetirar) {
       realizarRetiro();
     }
+    if(e.getSource() == vistaRealizarRetiroDolares.btnBuscarCliente) {
+      buscarNombreClienteRetiroDolares();
+    }
+     if(e.getSource()== vistaRealizarRetiroDolares.btnVerificarPIN){
+      verificarPINRetiroDolares();
+    }
+    if(e.getSource() == vistaRealizarRetiroDolares.btnVerificarPalabraClave) {
+      verificarPalabraClaveRetiroDolares();
+    }
+    if(e.getSource() == vistaRealizarRetiroDolares.btnRetirar) {
+      realizarRetiroDolares();
+    }
     if(e.getSource() == vistaRealizarTransferencia.btnBuscarCliente) {
       buscarNombreClienteTransferencia();
     }
@@ -207,6 +251,12 @@ public class ControladorOperaciones implements ActionListener {
     if(e.getSource() == vistaRealizarTransferencia.btnTransferir) {
       realizarTransferencia();
     }
+    if(e.getSource() == vistaConsultarTipoCambio.btnConsultarCompra) {
+      consultarTipoCambioCompra();
+    }
+    if(e.getSource() == vistaConsultarTipoCambio.btnConsultarVenta) {
+      consultarTipoCambioVenta();
+    }
     if(e.getSource() == vistaConsultarGananciasComisionesTotalizado.btnCalcularTotalComisiones) {
       calcularTotalComisiones();
     }
@@ -220,11 +270,20 @@ public class ControladorOperaciones implements ActionListener {
     if(e.getSource() == vistaRealizarDeposito.btnVolver) {
       this.vistaRealizarDeposito.setVisible(false);
     }
+    if(e.getSource() == vistaRealizarDepositoDolares.btnVolver) {
+      this.vistaRealizarDepositoDolares.setVisible(false);
+    }
     if(e.getSource() == vistaRealizarRetiro.btnVolver) {
       this.vistaRealizarRetiro.setVisible(false);
     }
+    if(e.getSource() == vistaRealizarRetiroDolares.btnVolver) {
+      this.vistaRealizarRetiroDolares.setVisible(false);
+    }
     if(e.getSource() == vistaRealizarTransferencia.btnVolver) {
       this.vistaRealizarTransferencia.setVisible(false);
+    }
+    if(e.getSource() == vistaConsultarTipoCambio.btnVolver) {
+      this.vistaConsultarTipoCambio.setVisible(false);
     }
     if(e.getSource() == vistaConsultarGananciasComisionesTotalizado.btnVolver){
       this.vistaConsultarGananciasComisionesTotalizado.setVisible(false);
@@ -318,6 +377,45 @@ public class ControladorOperaciones implements ActionListener {
     }
 
   }
+  
+  /**
+   * Metodo que busca el nombre del cliente para realizar un retiro en dolares
+  */ 
+  public void buscarNombreClienteRetiroDolares() {
+    ResultSet rs3;
+    ResultSet rs4;
+    ResultSet rs5;
+    int numeroCuenta = Integer.parseInt(vistaRealizarRetiroDolares.cbxCuentas.getSelectedItem().
+        toString());
+    rs = operacionDao.buscarNombreCliente(numeroCuenta);
+    rs2 = operacionDao.verificarSiCobrarComisionRetiro(numeroCuenta);
+    rs3 = cuentaDao.buscarPIN(numeroCuenta);
+    rs4 = operacionDao.obtenerNumeroTelefonicoCliente(numeroCuenta);
+    rs5 = operacionDao.obtenerSaldoCliente(numeroCuenta);
+    try {
+      if (rs.next()) {
+        vistaRealizarRetiroDolares.txtPropietarioCuenta.setText(rs.getString(1)+ " " + rs.getString(2)+
+        " " + rs.getString(3));
+      }
+      if (rs2.next()){
+        vistaRealizarRetiroDolares.txtCantidadOperaciones.setText(rs2.getString(1));
+      }
+      if (rs3.next()){
+        vistaRealizarRetiroDolares.txtPINNoModificable.setText(rs3.getString(1));
+      }
+      if (rs4.next()){
+        vistaRealizarRetiroDolares.txtNumeroTelefonicoCliente.setText(rs4.getString(1));
+      }
+      if (rs5.next()){
+        vistaRealizarRetiroDolares.txtSaldoNoModificable.setText(rs5.getString(1));
+      }
+      
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null,ex); 
+    }
+
+  }
+  
   
   /**
    * Metodo que busca el nombre del cliente de la cuenta origen para realizar una transferencia
@@ -552,7 +650,6 @@ public class ControladorOperaciones implements ActionListener {
             "el cual supera el saldo actual de su cuenta. Intente de nuevo");
           vistaRealizarRetiro.txtMonto.setText("");
         }
-    
   }
   
   /**
@@ -591,6 +688,113 @@ public class ControladorOperaciones implements ActionListener {
             verificarSaldoMayorQueMontoRetiro();
             JOptionPane.showMessageDialog(vistaRealizarRetiro, "Estimado usuario, el monto de "
                 + "este retiro es de"+ montoRetiro +" colones.\n" +
+                "El monto cobrado por concepto de comisión fue de 0.00 colones.");
+            }  
+      
+        }
+      }    catch (SQLException ex) {
+            Logger.getLogger(ControladorOperaciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }     
+  }
+  
+  /**
+   * Metodo que verifica el PIN de un retiro en dolares
+   */
+  public void verificarPINRetiroDolares() {
+    String PINNoModificable = vistaRealizarRetiroDolares.txtPINNoModificable.getText();
+    String PIN = vistaRealizarRetiroDolares.txtPIN.getText();
+    String numeroTelefonico = vistaRealizarRetiroDolares.txtNumeroTelefonicoCliente.getText();
+     if (PINNoModificable.equals(PIN)){
+       JOptionPane.showMessageDialog(vistaRealizarRetiroDolares, "El PIN ingresdo coincide con el PIN "
+         + "registrado en la cuenta");
+       String palabraClave = util.EnviarSMS.generarPalabra();
+       operacionDao.enviarPalabraClave(numeroTelefonico, palabraClave);
+       JOptionPane.showMessageDialog(vistaRealizarRetiroDolares, ": Estimado usuario se ha " +
+        "enviado una palabra por mensaje de texto, por favor revise sus mensajes y " +
+        "proceda a digitar la palabra enviada");
+       vistaRealizarRetiroDolares.txtPalabraClaveNoModificable.setText(palabraClave);
+     } else{
+       JOptionPane.showMessageDialog(vistaRealizarRetiroDolares, "El PIN ingresdo no coincide con el PIN "
+         + "registrado en la cuenta. Intente de nuevo.");
+       vistaRealizarRetiroDolares.txtPIN.setText("");
+     }
+  }
+  
+  /**
+   * Metodo que verifica la palabra clave para realizar un retiro en dolares
+   */
+  public void verificarPalabraClaveRetiroDolares() {
+    String palabraClaveNoModificable = vistaRealizarRetiroDolares.txtPalabraClaveNoModificable.getText();
+    String palabraClave = vistaRealizarRetiroDolares.txtPalabraClave.getText();
+    if (palabraClaveNoModificable.equals(palabraClave)){
+      JOptionPane.showMessageDialog(vistaRealizarRetiroDolares, "La palabra clave ingresda coincide con "
+          + "la palabra enviada por SMS. Por favor continue con la operacion");
+    } else {
+      JOptionPane.showMessageDialog(vistaRealizarRetiroDolares, "La palabra clave ingresda no coincide con "
+           + "la palabra enviada por SMS. Por favor, intente de nuevo.");
+      vistaRealizarRetiroDolares.txtPalabraClave.setText("");
+    } 
+  }
+   /**
+   * Metodo que verifica si el saldo de la cuenta es mayor que el monto a retirar para realizar un
+   * retiro
+   */
+  public void verificarSaldoMayorQueMontoRetiroDolares() {
+    String montoValidacion = vistaRealizarRetiroDolares.txtMonto.getText();
+    String saldoCuenta = vistaRealizarRetiroDolares.txtSaldoNoModificable.getText();
+    double saldoCuentaNumero = Double.parseDouble(saldoCuenta);
+    int montoRetiro = Integer.parseInt(montoValidacion);
+    int numeroCuenta = Integer.parseInt(vistaRealizarRetiroDolares.cbxCuentas.getSelectedItem()
+         .toString());
+    if (montoRetiro <= saldoCuentaNumero){
+        operacionDao.registrarRetiro(montoRetiro, numeroCuenta);  
+      } else {
+          JOptionPane.showMessageDialog(vistaRealizarRetiroDolares, "Estimado usuario, el monto de "
+            + "este retiro es de"+ montoRetiro +" colones \n" +
+            "el cual supera el saldo actual de su cuenta. Intente de nuevo");
+          vistaRealizarRetiroDolares.txtMonto.setText("");
+        }
+  }
+   /**
+   * Metodo que realiza un retiro en dolares 
+   */
+  public void realizarRetiroDolares(){
+    ResultSet rs3;
+    Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioVenta());
+    int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+    String montoValidacion = vistaRealizarRetiroDolares.txtMonto.getText();    
+    if (validaciones.Validaciones.validarMontoSinDecimal(montoValidacion) != true){
+      
+      JOptionPane.showMessageDialog(vistaRealizarRetiroDolares, "ERROR: no sido posible validar el monto:"
+          + "  " + montoValidacion);
+        
+    } else {
+      int montoRetiro = Integer.parseInt(montoValidacion);
+      int montoRetiroEnDolares = montoRetiro*tipoDeCambioDolarConvertidoAInt;
+      int montoComision = (int) (montoRetiroEnDolares * 0.02);
+      int numeroCuenta = Integer.parseInt(vistaRealizarRetiroDolares.cbxCuentas.getSelectedItem()
+         .toString());
+      
+      rs3 = operacionDao.obtenerUltimaOperacion();
+      try {
+        if (rs3.next()){
+          vistaRealizarRetiroDolares.lblNumOp.setText(rs3.getString(1));
+          int numeroOperacion = Integer.parseInt(vistaRealizarRetiroDolares.lblNumOp.getText());
+          int numeroCantidadOperacionesEfectuadas = Integer.parseInt(vistaRealizarRetiroDolares.
+            txtCantidadOperaciones.getText());
+            
+          if (numeroCantidadOperacionesEfectuadas >= 3) {
+            verificarSaldoMayorQueMontoRetiroDolares();
+            operacionDao.cobrarComision(montoComision, numeroCuenta, numeroOperacion);
+            JOptionPane.showMessageDialog(vistaRealizarRetiroDolares, "Estimado usuario, el monto de "
+                + "este retiro es de "+ montoRetiroEnDolares +" colones.\n" +
+                "El monto cobrado por concepto de comisión fue de "+ montoComision+" colones, "
+                + "que fueron rebajados automáticamente de su saldo actual");
+          } else {
+            verificarSaldoMayorQueMontoRetiroDolares();
+            JOptionPane.showMessageDialog(vistaRealizarRetiroDolares, "Estimado usuario, el monto de "
+                + "este retiro es de"+ montoRetiroEnDolares +" colones.\n" +
                 "El monto cobrado por concepto de comisión fue de 0.00 colones.");
             }  
       
@@ -713,6 +917,21 @@ public class ControladorOperaciones implements ActionListener {
     }  
   }
   
+  public void consultarTipoCambioCompra(){
+    Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioCompra());
+    int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+    JOptionPane.showMessageDialog(vistaConsultarTipoCambio, "El tipo de cambio del dolar en la compra"
+            + " a la fecha : " +LocalDate.now().toString()+" \nes de: " 
+            +tipoDeCambioDolarConvertidoAInt +" colones.");
+  }
+  
+  public void consultarTipoCambioVenta(){
+    Double tipoDeCambioDolar = Double.parseDouble(tipoCambio.getTipoCambioVenta());
+    int tipoDeCambioDolarConvertidoAInt = tipoDeCambioDolar.intValue();
+    JOptionPane.showMessageDialog(vistaConsultarTipoCambio, "El tipo de cambio del dolar en la venta"
+            + " a la fecha : " +LocalDate.now().toString()+" \nes de: " 
+            +tipoDeCambioDolarConvertidoAInt +" colones");
+  }
   /**
    * Metodo que calcula el total de ganancias de comisiones para el universo de cuentas
    */

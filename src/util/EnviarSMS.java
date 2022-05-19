@@ -13,7 +13,7 @@ import com.twilio.type.PhoneNumber;
 public class EnviarSMS {
   // Find your Account Sid and Token at twilio.com/user/account
   private static final String ACCOUNT_SID = "AC2cf8f610873feaa18fd83da5ae15a043";
-  private static final String AUTH_TOKEN = "3fee5b8b9681c6c7c3e4da372d41f16b";
+  private static final String AUTH_TOKEN = "44dd2302a386d0b203943e5ccaff6847";
   
   /**
    * Metodo que genera una palabra clave aleatoria
